@@ -1,4 +1,4 @@
-# REDFIT — Modelagem de Banco de Dados
+# RedFit — Modelagem de Banco de Dados
 
 ## Metadados
 
@@ -7,103 +7,85 @@
 - **Aluno 3:** MARCO AURÉLIO DA SILVA LIRA — RGM: 47572701
 - **Aluno 4:** PEDRO HENRIQUE DA SILVA — RGM: 48165191
 - **Aluno 5:** SUELLEN DE ARAUJO SANTOS PIMENTA — RGM: 48122360
-- **Curso:** Analise e Desenvolvimento de Sistema / Ciencia da Computação
+- **Curso:** Análise e Desenvolvimento de Sistemas / Ciência da Computação
 - **Disciplina:** Modelagem de Banco de Dados
-- **Projeto:** Modelagem de Banco de Dados — RedFit
+- **Projeto:** Entrega 1 — Modelo Conceitual (DER) — RedFit
+
+> **Atenção, grupo:** os trechos marcados como `[PREENCHER: ...]` dependem de informações reais da organização (visita, entrevista, fotos, contatos) ou do registro do uso de IA. Não foram inventados e precisam ser completados por vocês antes da entrega. Apaguem esta observação ao finalizar.
 
 ---
 
 # 1. Caracterização da Organização
 
-## 1.1 Organização
+## 1.1 Nome e natureza da organização
 
-A organização escolhida para o desenvolvimento do projeto é a **RedFit**, uma rede de academias.
+A organização escolhida é a **RedFit**, uma **rede de academias** (empresa com fins lucrativos) voltada à prática de musculação e ao acompanhamento de alunos.
 
-A empresa possui diversas unidades e oferece serviços relacionados à prática de exercícios físicos, acompanhamento de alunos, elaboração de treinos, avaliação física e controle de acesso às unidades.
+## 1.2 Contexto e porte
 
-De acordo com as informações levantadas durante a pesquisa, a rede possui **26 unidades** e trabalha com diferentes modalidades de planos, permitindo diferentes níveis de acesso aos serviços oferecidos.
+- **Natureza:** empresa privada, com fins lucrativos.
+- **Porte:** a rede possui **26 unidades**.
+- **Serviços:** planos com diferentes níveis de acesso às unidades, avaliação física, montagem e acompanhamento de treinos, controle de acesso (check-in) e parcerias com plataformas como o TotalPass.
+- **Atividades de rotina:** cadastro de alunos, contratação e cobrança de planos, avaliações físicas, elaboração de treinos e registro de acessos às unidades.
+- `[PREENCHER: nº aproximado de funcionários (instrutores/recepcionistas/gestores), nº aproximado de alunos e volume diário de acessos da unidade visitada]`
 
-## 1.2 Contexto e necessidades da organização
+## 1.3 Problemas e necessidades identificados
 
-A RedFit necessita controlar diversas informações relacionadas aos seus alunos, profissionais, unidades, planos, pagamentos, treinos, exercícios, equipamentos e acessos.
+A RedFit precisa manter relacionadas informações que hoje estão em assuntos distintos: dados cadastrais dos alunos, informações de saúde, planos, pagamentos, avaliações físicas, treinos, exercícios, equipamentos e acessos às unidades.
 
-Entre as principais informações identificadas estão:
+A necessidade central é **centralizar e relacionar esses dados** para que (i) o instrutor monte treinos considerando a saúde e a avaliação física do aluno, (ii) a recepção registre e consulte cadastros e acessos com segurança e (iii) a rede consiga acompanhar a evolução do aluno ao longo do tempo.
 
-- Cadastro dos alunos;
-- Dados pessoais e de contato;
-- Endereço dos alunos;
-- Informações de saúde;
-- Planos contratados;
-- Pagamentos;
-- Controle de acesso às unidades;
-- Instrutores;
-- Recepcionistas;
-- Treinos;
-- Exercícios;
-- Equipamentos;
-- Avaliações físicas;
-- Unidades da rede.
+`[PREENCHER: a "crise operacional" real — como isso é controlado hoje na unidade visitada (sistema próprio? planilhas? papel?) e quais problemas foram relatados pelo responsável]`
 
-O cadastro do aluno possui informações como CPF, nome completo, data de nascimento, endereço e telefone. A data de nascimento também pode ser utilizada para determinar se o aluno é menor ou maior de idade.
+## 1.4 Justificativa da escolha
 
-Também foram identificadas informações relacionadas à saúde dos alunos, incluindo problemas cardíacos, problemas ósseos, problemas pulmonares ou respiratórios, doenças hereditárias e utilização de medicamentos.
+A RedFit reúne processos distintos e interligados (cadastro, saúde, plano, pagamento, avaliação, treino, equipamentos e acesso), o que permite aplicar a modelagem conceitual com entidades, relacionamentos e cardinalidades variados. O porte (rede com 26 unidades) também exige um modelo escalável, sem ser inviável de modelar nesta primeira etapa.
 
-## 1.3 Justificativa
+`[PREENCHER: por que o grupo tem acesso à organização (ex.: um integrante é aluno/funcionário, conhece o gestor etc.)]`
 
-A utilização de um banco de dados estruturado permite centralizar as informações da organização, reduzir inconsistências, facilitar consultas e possibilitar um melhor controle dos processos realizados pela academia.
+## 1.5 Evidências da organização
 
-A modelagem proposta busca representar os principais processos e informações envolvidos na operação da RedFit, permitindo que os dados sejam organizados de forma consistente e possibilitando futuras expansões do sistema.
+`[PREENCHER — itens exigidos pelo professor:]`
+
+- Endereço completo da unidade visitada: `[PREENCHER]`
+- Link da organização (Google Maps / site / rede social): `[PREENCHER]`
+- Contato (telefone/e-mail) e nome/cargo do responsável entrevistado: `[PREENCHER]`
+- Data e forma do levantamento (visita, entrevista, observação): `[PREENCHER]`
+- Fotos da visita (salvar em `imagens/evidencias/` e referenciar aqui): `[PREENCHER]`
 
 ---
 
 # 2. Processos de Negócio
 
-Os principais processos de negócio identificados para a organização são:
+## 2.1 Principais processos mapeados
 
-### Cadastro de aluno
+1. **Cadastro e matrícula do aluno** — coleta de CPF, nome, data de nascimento, endereço e telefone; registro das informações de saúde; escolha do plano; registro do pagamento.
+2. **Controle de acesso (check-in)** — entrada por digital, reconhecimento facial ou acesso por parceiro (TotalPass) mediante autorização, com registro do acesso.
+3. **Avaliação física** — realizada por instrutor, com registro de peso, gordura corporal, gordura visceral, quantidade de água e massa muscular.
+4. **Montagem e acompanhamento de treinos** — instrutor define o treino, os exercícios (com séries, repetições, carga, tempo e intervalo) e os equipamentos; alterações preservam o histórico do aluno.
+5. **Gestão de exercícios e equipamentos** — exercícios associados a grupos musculares e aos equipamentos disponíveis nas unidades (cabo/polia, remada articulada, banco inclinado, banco reto, leg press, cadeira extensora).
+6. **Gestão de profissionais** — cadastro de instrutores (com registro CREF) e recepcionistas.
 
-O processo inicia-se com o cadastro do aluno no sistema, registrando informações pessoais, documentos, endereço e telefone.
+> A RedFit funciona exclusivamente como academia e **não possui aulas para agendamento**. Por isso não existe, no modelo, uma entidade "Aula": o conceito é representado por **TREINO**.
 
-### Gestão de planos
+## 2.2 Fluxogramas
 
-O sistema deve permitir registrar o plano contratado pelo aluno e suas respectivas características.
+### Processo 1 — Cadastro e matrícula do aluno
+![Fluxo 1](imagens/fluxo_1_cadastro_matricula.png)
 
-A pesquisa identificou planos com diferentes possibilidades de acesso às unidades e benefícios. A nomenclatura e algumas regras comerciais dos planos ainda precisam ser validadas com a organização. 
+### Processo 2 — Controle de acesso (check-in)
+![Fluxo 2](imagens/fluxo_2_check_in.png)
 
-### Pagamentos
+### Processo 3 — Avaliação física
+![Fluxo 3](imagens/fluxo_3_avaliacao_fisica.png)
 
-O sistema deve registrar os pagamentos realizados pelos alunos, incluindo valor, data, forma de pagamento e situação do pagamento.
+### Processo 4 — Montagem e acompanhamento de treinos
+![Fluxo 4](imagens/fluxo_4_treino.png)
 
-### Controle de acesso
+### Integração entre os processos
+![Fluxo 5](imagens/fluxo_5_integracao.png)
 
-O acesso às unidades pode ocorrer por meio de identificação biométrica, como impressão digital ou reconhecimento facial, além de acessos realizados por meio de parceiros como TotalPass, mediante autorização. 
-
-### Gestão de treinos
-
-O sistema deve armazenar os treinos dos alunos, seus exercícios, séries, repetições, cargas, tempos e intervalos.
-
-As alterações realizadas nos treinos podem ser mantidas para permitir o histórico de evolução do aluno.
-
-### Avaliação física
-
-O sistema deve permitir registrar informações relacionadas às avaliações físicas dos alunos, incluindo peso, gordura corporal, gordura visceral, quantidade de água e massa muscular.
-
-### Gestão de profissionais
-
-A organização possui instrutores e recepcionistas, sendo necessário armazenar informações cadastrais e profissionais desses colaboradores.
-
-### Gestão de exercícios e equipamentos
-
-Os exercícios são relacionados aos grupos musculares e aos equipamentos disponíveis na academia.
-
-Entre os equipamentos identificados estão:
-
-- Cabo/polia;
-- Remada articulada;
-- Banco inclinado;
-- Banco reto;
-- Leg press;
-- Cadeira extensora.
+A integração acontece em torno do **aluno**: o cadastro/matrícula (1) o habilita ao acesso (2); a avaliação física (3) orienta a montagem do treino (4); o treino é executado nas unidades, que possuem os equipamentos usados pelos exercícios.
 
 ---
 
@@ -111,513 +93,331 @@ Entre os equipamentos identificados estão:
 
 ## 3.1 Requisitos Funcionais
 
-### RF01 — Cadastro de aluno
-
-O sistema deve permitir cadastrar alunos com nome completo, CPF, data de nascimento, endereço e telefone.
-
-### RF02 — Consulta de aluno
-
-O sistema deve permitir consultar os dados cadastrados dos alunos.
-
-### RF03 — Atualização de aluno
-
-O sistema deve permitir atualizar os dados cadastrais dos alunos.
-
-### RF04 — Cadastro de plano
-
-O sistema deve permitir cadastrar os planos disponibilizados pela organização.
-
-### RF05 — Associação de plano
-
-O sistema deve permitir associar um aluno a um plano.
-
-### RF06 — Controle de pagamentos
-
-O sistema deve permitir registrar os pagamentos realizados pelos alunos.
-
-### RF07 — Consulta de pagamentos
-
-O sistema deve permitir consultar o histórico de pagamentos dos alunos.
-
-### RF08 — Controle de acesso
-
-O sistema deve registrar os acessos dos alunos às unidades.
-
-### RF09 — Cadastro de instrutores
-
-O sistema deve permitir cadastrar instrutores com seus respectivos dados profissionais.
-
-### RF10 — Cadastro de recepcionistas
-
-O sistema deve permitir cadastrar recepcionistas.
-
-### RF11 — Cadastro de treinos
-
-O sistema deve permitir criar e armazenar treinos para os alunos.
-
-### RF12 — Cadastro de exercícios
-
-O sistema deve permitir cadastrar exercícios.
-
-### RF13 — Associação de exercícios
-
-O sistema deve permitir associar exercícios aos treinos.
-
-### RF14 — Registro de séries
-
-O sistema deve permitir registrar a quantidade de séries de cada exercício.
-
-### RF15 — Registro de repetições
-
-O sistema deve permitir registrar a quantidade de repetições de cada exercício.
-
-### RF16 — Registro de carga
-
-O sistema deve permitir registrar a carga utilizada em cada exercício.
-
-### RF17 — Registro de intervalo
-
-O sistema deve permitir registrar o intervalo entre as séries.
-
-### RF18 — Cadastro de equipamentos
-
-O sistema deve permitir cadastrar os equipamentos disponíveis nas unidades.
-
-### RF19 — Cadastro de unidades
-
-O sistema deve permitir cadastrar as unidades pertencentes à rede.
-
-### RF20 — Avaliação física
-
-O sistema deve permitir registrar informações referentes às avaliações físicas dos alunos.
-
-### RF21 — Prontuário de saúde
-
-O sistema deve permitir armazenar informações relacionadas à saúde dos alunos.
-
-### RF22 — Histórico
-
-O sistema deve permitir manter o histórico de informações que sofreram alterações, principalmente relacionadas aos treinos.
-
----
+| ID | Requisito |
+|---|---|
+| RF01 | Cadastrar alunos com nome completo, CPF, data de nascimento, endereço e telefone. |
+| RF02 | Consultar e atualizar os dados cadastrais dos alunos. |
+| RF03 | Registrar o prontuário de saúde do aluno (problemas cardíacos, ósseos, respiratórios, doenças hereditárias e medicamentos). |
+| RF04 | Cadastrar planos e associar cada aluno ao plano contratado, com a data de contratação. |
+| RF05 | Registrar pagamentos dos alunos e consultar o histórico de pagamentos. |
+| RF06 | Registrar os acessos (check-in) dos alunos às unidades, informando o tipo de acesso e o resultado da validação. |
+| RF07 | Cadastrar instrutores (incluindo CREF) e recepcionistas. |
+| RF08 | Registrar qual recepcionista cadastrou cada aluno. |
+| RF09 | Registrar avaliações físicas do aluno, indicando o instrutor que a realizou. |
+| RF10 | Cadastrar treinos para os alunos, indicando o instrutor responsável. |
+| RF11 | Cadastrar exercícios, com grupo muscular e equipamento utilizado (quando houver). |
+| RF12 | Compor o treino com itens de exercício, registrando séries, repetições, carga, tempo e intervalo. |
+| RF13 | Cadastrar equipamentos e informar quais unidades os possuem e em que quantidade. |
+| RF14 | Cadastrar as unidades da rede. |
+| RF15 | Manter o histórico de treinos do aluno (alterações geram novo treino, preservando o anterior). |
 
 ## 3.2 Requisitos Não Funcionais
 
-### RNF01 — Segurança
-
-O sistema deve proteger os dados pessoais e de saúde armazenados.
-
-### RNF02 — Integridade
-
-Os dados armazenados devem manter consistência entre as entidades relacionadas.
-
-### RNF03 — Disponibilidade
-
-O sistema deve estar disponível para utilização pelos funcionários autorizados durante o funcionamento da organização.
-
-### RNF04 — Desempenho
-
-As consultas e operações mais frequentes devem apresentar tempo de resposta adequado.
-
-### RNF05 — Controle de acesso
-
-O sistema deve restringir determinadas operações de acordo com o perfil do usuário.
-
-### RNF06 — Escalabilidade
-
-A estrutura do banco deve permitir a inclusão de novas unidades, alunos, profissionais, equipamentos e demais informações sem necessidade de alterações estruturais frequentes.
-
-### RNF07 — Manutenibilidade
-
-O banco de dados deve possuir estrutura organizada e padronizada, facilitando futuras alterações e manutenções.
-
-### RNF08 — Confiabilidade
-
-O sistema deve garantir o armazenamento correto das informações registradas.
+| ID | Categoria | Requisito |
+|---|---|---|
+| RNF01 | Segurança / privacidade | Dados pessoais e de saúde devem ser protegidos e tratados conforme a LGPD (dados de saúde são dados sensíveis). |
+| RNF02 | Controle de acesso | Operações devem ser restritas por perfil: **exclusões apenas por gestores; alterações por gestores e recepção**. |
+| RNF03 | Integridade | Os dados devem manter consistência entre as entidades relacionadas. |
+| RNF04 | Disponibilidade | O sistema deve estar disponível aos funcionários durante o funcionamento das unidades. |
+| RNF05 | Desempenho | Consultas frequentes (cadastro, check-in, treino do aluno) devem ter tempo de resposta adequado. |
+| RNF06 | Escalabilidade | A estrutura deve permitir novas unidades, alunos, profissionais, equipamentos e planos sem mudanças estruturais frequentes. |
+| RNF07 | Usabilidade | A interface deve permitir consulta e atualização compreensíveis pelos usuários responsáveis. |
+| RNF08 | Manutenibilidade | O banco deve seguir padrão único de nomenclatura e estrutura organizada. |
 
 ---
 
 # 4. Regras de Negócio
 
-### RN01
+## 4.1 Regras operacionais
 
-Cada aluno deve possuir um CPF cadastrado.
+| ID | Regra |
+|---|---|
+| RN01 | Todo aluno deve ter CPF, nome completo, data de nascimento, endereço e telefone cadastrados. |
+| RN02 | A data de nascimento é usada para identificar se o aluno é menor ou maior de idade. |
+| RN03 | O endereço é solicitado para verificar proximidade e para situações de emergência. |
+| RN04 | Cada aluno possui no máximo um plano contratado por vez; um plano pode ter vários alunos. |
+| RN05 | Todo pagamento deve estar associado a um aluno. |
+| RN06 | Todo acesso à unidade deve ser registrado, com o tipo de acesso (digital, facial ou parceiro autorizado) e o resultado da validação. |
+| RN07 | As informações de saúde do aluno ficam no prontuário de saúde (um por aluno). |
+| RN08 | Todo aluno é cadastrado por um recepcionista. |
+| RN09 | Toda avaliação física pertence a um aluno e é realizada por um instrutor. |
+| RN10 | Todo treino pertence a um aluno e tem um instrutor responsável. |
+| RN11 | O treino é composto por itens; cada item refere-se a um exercício, com séries, repetições, carga, tempo e intervalo. |
+| RN12 | Uma alteração de treino encerra o treino atual (data de término) e cria um novo, mantendo o histórico. |
+| RN13 | Cada exercício pode utilizar um equipamento (opcional, pois há exercícios sem equipamento). |
+| RN14 | Instrutores devem possuir registro profissional (CREF). |
+| RN15 | A RedFit não tem aulas para agendamento; só existem treinos. |
 
-### RN02
+## 4.2 Restrições organizacionais
 
-O cadastro do aluno deve conter nome completo, data de nascimento, endereço e telefone.
-
-### RN03
-
-A data de nascimento deve ser utilizada para determinar a idade do aluno.
-
-### RN04
-
-Um aluno pode possuir um plano contratado.
-
-### RN05
-
-Os pagamentos devem estar associados ao aluno correspondente.
-
-### RN06
-
-O acesso à unidade deve ser registrado no sistema.
-
-### RN07
-
-O acesso pode ocorrer por meio de identificação biométrica ou por parceiros autorizados.
-
-### RN08
-
-As alterações relacionadas aos treinos podem ser mantidas para histórico.
-
-### RN09
-
-Os exercícios devem estar associados aos respectivos treinos.
-
-### RN10
-
-Os equipamentos devem estar relacionados aos exercícios e grupos musculares correspondentes.
-
-### RN11
-
-Os instrutores devem possuir registro profissional CREF.
-
-### RN12
-
-As informações de saúde devem ser armazenadas no prontuário do aluno.
-
-### RN13
-
-Determinadas operações, como exclusões, devem ser realizadas por usuários autorizados.
-
-### RN14
-
-Alterações cadastrais devem ser realizadas por funcionários com permissão para essa operação.
-
-As regras comerciais relacionadas aos planos, valores, benefícios, fidelidade, cancelamento e utilização de unidades ainda precisam ser confirmadas com a organização.
+- **Permissões:** exclusões são feitas por gestores; alterações por gestores e recepção. Importa porque define os perfis de acesso (RNF02).
+- **Dados de saúde e menores de idade:** exigem tratamento sensível (LGPD) e cuidado com dados de menores; por isso o prontuário é uma entidade separada.
+- **Planos:** segundo o levantamento, o plano Pro dá acesso às 26 unidades e permite levar acompanhante por até 15 dias no mês. Essas regras comerciais influenciam os atributos do plano.
+  `[PREENCHER: confirmar os nomes oficiais e valores atuais dos planos, regras de cancelamento e fidelidade — hoje estas informações constam como pendentes]`
+- **Parceiros:** acessos via TotalPass dependem de autorização do parceiro.
 
 ---
 
 # 5. Dicionário de Dados Conceitual (Preliminar)
 
-## 5.1 ALUNO
+Padrão de nomenclatura (igual para todas as entidades): `ID_` identificador · `NM_` nome · `NR_` número/documento · `DT_` data · `DS_` descrição/texto · `VL_` valor · `QT_` quantidade · `TP_` tipo/categoria · `IN_` indicador (sim/não). Chaves estrangeiras **não** aparecem aqui, pois surgem dos relacionamentos (seção 6) e serão tratadas no modelo lógico. Nenhum exemplo com dados reais foi usado.
 
-| Atributo | Descrição | Regra de Negócio |
+## 5.1 ALUNO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_ALUNO | Identificador único do aluno | Deve ser único |
-| NM_ALUNO | Nome completo do aluno | Obrigatório |
-| NR_CPF | CPF do aluno | Deve ser único |
-| DT_NASCIMENTO | Data de nascimento | Obrigatório |
-| DS_ENDERECO | Endereço do aluno | Obrigatório |
-| NR_TELEFONE | Telefone do aluno | Deve ser informado |
+| ID_ALUNO | Identificador único do aluno | Obrigatório, único |
+| NM_ALUNO | Nome completo | Obrigatório |
+| NR_CPF | CPF | Obrigatório, único |
+| DT_NASCIMENTO | Data de nascimento | Obrigatória; define maior/menor de idade |
+| DS_ENDERECO | Endereço | Obrigatório (proximidade e emergência) |
+| NR_TELEFONE | Telefone de contato | Obrigatório |
+| DS_EMAIL | E-mail | Opcional `[PREENCHER: confirmar se a RedFit coleta]` |
 
 ## 5.2 PLANO
-
-| Atributo | Descrição | Regra de Negócio |
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_PLANO | Identificador do plano | Deve ser único |
-| NM_PLANO | Nome do plano | Obrigatório |
-| VL_PLANO | Valor do plano | Deve possuir valor válido |
-| DS_PLANO | Descrição do plano | Descreve as características do plano |
-| IN_ATIVO | Situação do plano | Indica se está disponível |
+| ID_PLANO | Identificador do plano | Obrigatório, único |
+| NM_PLANO | Nome comercial do plano | Obrigatório |
+| TP_MODALIDADE | Modalidade de acesso (ex.: quais unidades) | Obrigatório |
+| VL_MENSAL | Valor mensal vigente | Obrigatório, maior que zero |
+| DS_PLANO | Descrição e benefícios | Opcional |
+| IN_ATIVO | Plano disponível para contratação | Obrigatório |
 
-## 5.3 PRONTUÁRIO_SAUDE
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.3 PRONTUARIO_SAUDE
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_PRONTUARIO | Identificador do prontuário | Deve ser único |
-| ID_ALUNO | Aluno relacionado | Deve existir um aluno |
-| IN_PROBLEMA_CARDIACO | Indicação de problema cardíaco | Informação de saúde |
-| IN_PROBLEMA_OSSEO | Indicação de problema ósseo | Informação de saúde |
-| IN_PROBLEMA_RESPIRATORIO | Indicação de problema respiratório | Informação de saúde |
-| DS_DOENCA_HEREDITARIA | Doenças hereditárias | Informação de saúde |
-| DS_MEDICAMENTO | Medicamentos utilizados | Informação de saúde |
+| ID_PRONTUARIO | Identificador do prontuário | Obrigatório, único |
+| IN_PROBLEMA_CARDIACO | Possui problema cardíaco | Dado sensível (LGPD) |
+| IN_PROBLEMA_OSSEO | Possui problema ósseo | Dado sensível (LGPD) |
+| IN_PROBLEMA_RESPIRATORIO | Possui problema pulmonar/respiratório | Dado sensível (LGPD) |
+| DS_DOENCA_HEREDITARIA | Doenças hereditárias na família | Dado sensível (LGPD) |
+| DS_MEDICAMENTO | Medicamentos em uso | Dado sensível (LGPD) |
+| DS_OBSERVACAO | Observações do acompanhamento | Opcional |
+| DT_ATUALIZACAO | Data da última atualização | Atualizada a cada alteração |
 
-## 5.4 INSTRUTOR
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.4 AVALIACAO_FISICA
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_INSTRUTOR | Identificador do instrutor | Deve ser único |
-| NM_INSTRUTOR | Nome do instrutor | Obrigatório |
-| NR_CPF | CPF do instrutor | Deve ser único |
-| NR_TELEFONE | Telefone | Deve ser informado |
-| DS_ESPECIALIDADE | Especialidade | Informação profissional |
-| DS_CERTIFICACAO | Certificação/formação | Informação profissional |
-| NR_CREF | Registro CREF | Deve ser informado |
+| ID_AVALIACAO | Identificador da avaliação | Obrigatório, único |
+| DT_AVALIACAO | Data da avaliação | Obrigatória |
+| VL_PESO | Peso | Maior que zero; unidade a definir |
+| VL_GORDURA_CORPORAL | Gordura corporal | Entre 0 e 100 (%) |
+| VL_GORDURA_VISCERAL | Gordura visceral | Maior ou igual a zero |
+| VL_AGUA | Quantidade de água corporal | Unidade a definir |
+| VL_MASSA_MUSCULAR | Massa muscular | Maior que zero; unidade a definir |
 
-## 5.5 RECEPCIONISTA
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.5 INSTRUTOR
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_RECEPCIONISTA | Identificador do recepcionista | Deve ser único |
-| NM_RECEPCIONISTA | Nome do recepcionista | Obrigatório |
-| NR_CPF | CPF | Deve ser único |
-| NR_TELEFONE | Telefone | Deve ser informado |
+| ID_INSTRUTOR | Identificador do instrutor | Obrigatório, único |
+| NM_INSTRUTOR | Nome completo | Obrigatório |
+| NR_CPF | CPF | Obrigatório, único |
+| NR_CREF | Registro profissional CREF | Obrigatório, único |
+| NR_TELEFONE | Telefone | Obrigatório |
+| DS_ESPECIALIDADE | Especialidade | Opcional |
+| DS_CERTIFICACAO | Certificações/formação | Opcional |
+
+## 5.6 RECEPCIONISTA
+| Atributo | Descrição | Regra de negócio |
+|---|---|---|
+| ID_RECEPCIONISTA | Identificador do recepcionista | Obrigatório, único |
+| NM_RECEPCIONISTA | Nome completo | Obrigatório |
+| NR_CPF | CPF | Obrigatório, único |
+| NR_TELEFONE | Telefone | Obrigatório |
+| DS_EMAIL | E-mail | Opcional |
 | DS_ENDERECO | Endereço | Informação cadastral |
 
-## 5.6 TREINO
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.7 TREINO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_TREINO | Identificador do treino | Deve ser único |
-| ID_ALUNO | Aluno relacionado | Deve existir um aluno |
-| ID_INSTRUTOR | Instrutor responsável | Deve existir um instrutor |
+| ID_TREINO | Identificador do treino | Obrigatório, único |
 | NM_TREINO | Nome do treino | Obrigatório |
-| TP_TREINO | Tipo do treino | Deve representar o tipo definido pela organização |
-| DS_TREINO | Descrição do treino | Descrição das atividades |
-| DT_INICIO | Data de início | Obrigatória |
-| DT_FIM | Data de término | Deve ser posterior à data de início |
-| DS_OBJETIVO | Objetivo do treino | Descrição do objetivo |
+| TP_TREINO | Tipo/classificação do treino | Valores definidos pela RedFit |
+| DS_TREINO | Descrição das atividades | Opcional |
+| DS_OBJETIVO | Objetivo do treino | Opcional |
+| DT_INICIO | Início de vigência | Obrigatória |
+| DT_FIM | Fim de vigência | Posterior a DT_INICIO; vazia enquanto vigente |
 
-## 5.7 ITEM_TREINO
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.8 ITEM_TREINO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_ITEM | Identificador do item | Deve ser único |
-| ID_TREINO | Treino relacionado | Deve existir um treino |
-| ID_EXERCICIO | Exercício relacionado | Deve existir um exercício |
-| QT_SERIES | Quantidade de séries | Deve ser maior que zero |
-| QT_REPETICOES | Quantidade de repetições | Deve ser maior que zero |
-| VL_CARGA | Carga utilizada | Deve possuir valor válido |
-| QT_TEMPO | Tempo do exercício | Unidade deve ser definida |
-| QT_INTERVALO | Intervalo entre séries | Unidade deve ser definida |
+| ID_ITEM | Identificador do item | Obrigatório, único |
+| QT_SERIES | Número de séries | Maior que zero |
+| QT_REPETICOES | Repetições por série | Maior que zero |
+| VL_CARGA | Carga utilizada | Maior ou igual a zero; unidade a definir |
+| QT_TEMPO | Tempo do exercício | Quando aplicável; unidade a definir |
+| QT_INTERVALO | Intervalo entre séries | Unidade a definir |
 
-## 5.8 EXERCICIO
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.9 EXERCICIO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_EXERCICIO | Identificador do exercício | Deve ser único |
+| ID_EXERCICIO | Identificador do exercício | Obrigatório, único |
 | NM_EXERCICIO | Nome do exercício | Obrigatório |
-| DS_EXERCICIO | Descrição do exercício | Descrição da execução |
-| DS_GRUPO_MUSCULAR | Grupo muscular trabalhado | Deve ser informado |
-| ID_EQUIPAMENTO | Equipamento utilizado | Deve existir quando aplicável |
+| DS_EXERCICIO | Descrição da execução | Opcional |
+| DS_GRUPO_MUSCULAR | Grupo muscular trabalhado | Obrigatório |
 
-## 5.9 UNIDADE
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.10 EQUIPAMENTO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_UNIDADE | Identificador da unidade | Deve ser único |
+| ID_EQUIPAMENTO | Identificador do tipo de equipamento | Obrigatório, único |
+| NM_EQUIPAMENTO | Nome (ex.: leg press) | Obrigatório |
+| DS_EQUIPAMENTO | Descrição/características | Opcional |
+
+## 5.11 UNIDADE
+| Atributo | Descrição | Regra de negócio |
+|---|---|---|
+| ID_UNIDADE | Identificador da unidade | Obrigatório, único |
 | NM_UNIDADE | Nome da unidade | Obrigatório |
-| DS_ENDERECO | Endereço da unidade | Deve ser informado |
+| DS_ENDERECO | Endereço | Obrigatório `[PREENCHER: ao menos o da unidade visitada]` |
 
-A pesquisa identificou a existência de 26 unidades, porém os endereços individuais das unidades não foram disponibilizados no material analisado.
-
-## 5.10 CHECK_IN
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.12 CHECK_IN
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_CHECK_IN | Identificador do acesso | Deve ser único |
-| ID_ALUNO | Aluno que realizou o acesso | Deve existir um aluno |
-| ID_UNIDADE | Unidade acessada | Deve existir uma unidade |
-| DT_HORA | Data e hora do acesso | Obrigatório |
-| TP_ACESSO | Tipo de acesso | Deve representar a forma utilizada |
-| TP_STATUS | Situação do acesso | Deve representar o resultado da validação |
+| ID_CHECK_IN | Identificador do acesso | Obrigatório, único |
+| DT_HORA | Data e hora do acesso | Obrigatória |
+| TP_ACESSO | Forma de acesso (digital, facial, parceiro) | Valores definidos pela RedFit |
+| TP_STATUS | Resultado da validação (liberado/negado) | Obrigatório |
 
-## 5.11 PAGAMENTO
-
-| Atributo | Descrição | Regra de Negócio |
+## 5.13 PAGAMENTO
+| Atributo | Descrição | Regra de negócio |
 |---|---|---|
-| ID_PAGAMENTO | Identificador do pagamento | Deve ser único |
-| ID_ALUNO | Aluno relacionado | Deve existir um aluno |
+| ID_PAGAMENTO | Identificador do pagamento | Obrigatório, único |
 | DT_PAGAMENTO | Data do pagamento | Obrigatória |
-| VL_PAGAMENTO | Valor pago | Deve ser maior que zero |
-| TP_FORMA_PAGAMENTO | Forma de pagamento | Deve ser informada |
-| TP_STATUS | Situação do pagamento | Deve indicar a situação atual |
-| IN_RECORRENTE | Indica pagamento recorrente | Deve representar a recorrência |
-
-## 5.12 EQUIPAMENTO
-
-| Atributo | Descrição | Regra de Negócio |
-|---|---|---|
-| ID_EQUIPAMENTO | Identificador do equipamento | Deve ser único |
-| NM_EQUIPAMENTO | Nome do equipamento | Obrigatório |
-| DS_EQUIPAMENTO | Descrição do equipamento | Descrição do equipamento |
-| ID_UNIDADE | Unidade onde está localizado | Deve existir uma unidade |
+| VL_PAGAMENTO | Valor pago | Maior que zero |
+| TP_FORMA_PAGAMENTO | Forma de pagamento | Obrigatória |
+| TP_STATUS | Situação (ex.: pago, pendente) | Obrigatória |
+| IN_RECORRENTE | Pagamento recorrente | Obrigatório |
 
 ---
 
 # 6. Modelagem Conceitual
 
-A modelagem conceitual foi desenvolvida considerando as principais entidades identificadas durante o levantamento das informações da RedFit.
+## 6.1 Entidades reconhecidas
 
-As principais entidades são:
+| Entidade | Justificativa |
+|---|---|
+| ALUNO | Cliente cadastrado; entidade central do modelo. |
+| PLANO | Catálogo de planos com diferentes modalidades de acesso. |
+| PRONTUARIO_SAUDE | Dados de saúde, separados por serem sensíveis (LGPD). |
+| AVALIACAO_FISICA | Registro datado de medidas do aluno, feito por instrutor. |
+| INSTRUTOR | Profissional (com CREF) que avalia e elabora treinos. |
+| RECEPCIONISTA | Profissional que cadastra os alunos. |
+| TREINO | Plano de treino do aluno em um período (não existe "aula"). |
+| ITEM_TREINO | Resolve a relação muitos-para-muitos entre treino e exercício e guarda séries, repetições, carga, tempo e intervalo. |
+| EXERCICIO | Catálogo de exercícios, com grupo muscular. |
+| EQUIPAMENTO | Catálogo de tipos de equipamento. |
+| UNIDADE | Cada uma das 26 unidades da rede. |
+| CHECK_IN | Registro de cada acesso a uma unidade. |
+| PAGAMENTO | Registro de cada pagamento do aluno. |
 
-- ALUNO
-- PLANO
-- PRONTUÁRIO_SAUDE
-- INSTRUTOR
-- RECEPCIONISTA
-- TREINO
-- ITEM_TREINO
-- EXERCICIO
-- UNIDADE
-- CHECK_IN
-- PAGAMENTO
-- EQUIPAMENTO
+## 6.2 Atributos e classificações
 
-## 6.1 Relacionamentos principais
+Os atributos de cada entidade e suas regras estão na seção 5. Todos os identificadores (`ID_*`) são chaves e aparecem sublinhados no DER. `DT_CONTRATACAO` e `QT_EQUIPAMENTO` são atributos de **relacionamento** (não pertencem a uma só entidade).
 
-### ALUNO e PLANO
+## 6.3 Relacionamentos e cardinalidades
 
-Um aluno pode possuir um plano contratado, enquanto um plano pode estar associado a diversos alunos.
+| Relacionamento | Lado A | Lado B | Leitura |
+|---|---|---|---|
+| registra | RECEPCIONISTA (1) | ALUNO (N) | Um recepcionista cadastra vários alunos; cada aluno é cadastrado por um recepcionista. |
+| contrata | PLANO (1) | ALUNO (N) | Um plano tem vários alunos; cada aluno tem um plano. Atributo: `DT_CONTRATACAO`. |
+| possui | ALUNO (1) | PRONTUARIO_SAUDE (1) | Cada aluno tem um prontuário e cada prontuário pertence a um aluno. |
+| realiza | ALUNO (1) | AVALIACAO_FISICA (N) | Um aluno faz várias avaliações ao longo do tempo. |
+| aplica | INSTRUTOR (1) | AVALIACAO_FISICA (N) | Um instrutor realiza várias avaliações. |
+| tem | ALUNO (1) | TREINO (N) | Um aluno tem vários treinos (histórico). |
+| elabora | INSTRUTOR (1) | TREINO (N) | Um instrutor é responsável por vários treinos. |
+| compõe-se de | TREINO (1) | ITEM_TREINO (N) | Um treino tem vários itens. |
+| é prescrito em | EXERCICIO (1) | ITEM_TREINO (N) | Um exercício aparece em vários itens de treino. |
+| é usado em | EQUIPAMENTO (1) | EXERCICIO (N) | Um equipamento é usado em vários exercícios; o exercício pode não ter equipamento. |
+| dispõe de | UNIDADE (N) | EQUIPAMENTO (M) | Uma unidade tem vários equipamentos e um tipo de equipamento está em várias unidades. Atributo: `QT_EQUIPAMENTO`. |
+| efetua | ALUNO (1) | CHECK_IN (N) | Um aluno realiza vários acessos. |
+| recebe | UNIDADE (1) | CHECK_IN (N) | Uma unidade recebe vários acessos. |
+| paga | ALUNO (1) | PAGAMENTO (N) | Um aluno tem vários pagamentos. |
 
-### ALUNO e PRONTUÁRIO_SAUDE
+## 6.4 Restrições e políticas aplicadas ao modelo
 
-O prontuário de saúde pertence ao aluno e armazena informações relacionadas à sua saúde.
-
-### ALUNO e TREINO
-
-Um aluno pode possuir diversos treinos ao longo do tempo.
-
-### INSTRUTOR e TREINO
-
-Um instrutor pode ser responsável por diversos treinos.
-
-### TREINO e ITEM_TREINO
-
-Um treino é composto por diversos itens de treino.
-
-### ITEM_TREINO e EXERCICIO
-
-Cada item de treino está associado a um exercício.
-
-### EXERCICIO e EQUIPAMENTO
-
-Um exercício pode utilizar determinado equipamento.
-
-### UNIDADE e EQUIPAMENTO
-
-Uma unidade pode possuir diversos equipamentos.
-
-### ALUNO e CHECK_IN
-
-Um aluno pode possuir diversos registros de acesso.
-
-### UNIDADE e CHECK_IN
-
-Uma unidade pode possuir diversos registros de acesso.
-
-### ALUNO e PAGAMENTO
-
-Um aluno pode possuir diversos pagamentos registrados.
+- Perfis de acesso (exclusão só por gestor; alteração por gestor e recepção) não viram entidade nesta etapa; serão tratados na implementação (RNF02).
+- Dados de saúde isolados em entidade própria (LGPD).
+- O histórico de treinos é obtido por novas ocorrências de TREINO com `DT_INICIO`/`DT_FIM`, sem entidade extra.
 
 ---
 
 # 7. Diagrama Entidade-Relacionamento (DER)
 
-O Diagrama Entidade-Relacionamento representa graficamente as entidades, atributos, relacionamentos e cardinalidades definidos durante a modelagem conceitual.
+![DER RedFit](imagens/DER_RedFit_v2.png)
 
-## 7.1 DER
+*Arquivo: `imagens/DER_RedFit_v2.png`. Notação: retângulo = entidade; losango = relacionamento; elipse = atributo (sublinhado = identificador); elipse tracejada = atributo do relacionamento; 1/N/M = cardinalidade máxima.*
 
-O Diagrama Entidade-Relacionamento desenvolvido para representar a estrutura conceitual do banco de dados da RedFit é apresentado abaixo.
+## 7.1 Consistência e escalabilidade
 
-<img width="1345" height="1028" alt="diagrama-entidade-relacionamento" src="https://github.com/user-attachments/assets/8f242385-fa67-4484-b03b-60eca5767478" />
-
-## 7.2 Entidades representadas
-
-O DER deve representar as seguintes entidades:
-
-- ALUNO
-- PLANO
-- PRONTUÁRIO_SAUDE
-- INSTRUTOR
-- RECEPCIONISTA
-- TREINO
-- ITEM_TREINO
-- EXERCICIO
-- UNIDADE
-- CHECK_IN
-- PAGAMENTO
-- EQUIPAMENTO
-
-## 7.3 Consistência e escalabilidade
-
-O modelo foi estruturado buscando separar as principais informações da organização em entidades específicas.
-
-Essa organização permite evitar a concentração de informações diferentes em uma única estrutura e facilita a manutenção e expansão do banco de dados.
-
-A estrutura pode ser expandida posteriormente para contemplar novas unidades, alunos, profissionais, equipamentos, planos e outras funcionalidades.
+- O README, o dicionário e o DER descrevem **as mesmas 13 entidades e 14 relacionamentos**.
+- Novas unidades, planos, exercícios, equipamentos e profissionais entram como novas linhas, sem alterar a estrutura.
+- Pagamentos, check-ins, avaliações e treinos acumulam histórico por aluno.
+- A estrutura está preparada para a próxima etapa (modelo lógico): cada relacionamento 1:N vira uma chave estrangeira no lado N e `dispõe de` (N:M) vira tabela associativa com `QT_EQUIPAMENTO`.
 
 ---
 
 # 8. Justificativa Técnica
 
-A modelagem proposta foi construída a partir das informações levantadas sobre os processos da RedFit.
+**Por que estas entidades.** Cada entidade representa um conceito com identidade própria e ciclo de vida próprio no levantamento. Criamos entidade separada quando o dado se repete ao longo do tempo (AVALIACAO_FISICA, CHECK_IN, PAGAMENTO, TREINO) ou é compartilhado entre vários registros (PLANO, EXERCICIO, EQUIPAMENTO, UNIDADE).
 
-A separação das entidades permite organizar os dados de acordo com suas responsabilidades.
+**TREINO e não "AULA".** Uma versão anterior do DER usava "Aula/Treino". Como a RedFit não tem aulas para agendamento, o nome foi corrigido para TREINO, evitando criar um conceito que a organização não possui.
 
-A entidade **ALUNO**, por exemplo, concentra os dados cadastrais do cliente, enquanto informações específicas de saúde são armazenadas no **PRONTUÁRIO_SAUDE**.
+**ITEM_TREINO.** Treino e exercício têm relação muitos-para-muitos (um treino tem vários exercícios; um exercício está em vários treinos), e séries, repetições, carga, tempo e intervalo pertencem à *combinação* treino+exercício. Por isso a relação virou a entidade ITEM_TREINO. Na versão anterior esses atributos estavam em "Exercício", o que misturava catálogo (o que é o exercício) com prescrição (como o aluno o executa).
 
-Da mesma forma, os dados referentes aos treinos foram separados em **TREINO**, **ITEM_TREINO** e **EXERCICIO**, permitindo representar a composição de um treino e os exercícios que fazem parte dele.
+**PLANO ligado ao ALUNO.** Quem contrata o plano é o aluno; o plano não é parte do prontuário de saúde. A versão anterior ligava Plano a Prontuário (1:1), o que impediria vários alunos no mesmo plano. Agora PLANO 1:N ALUNO, e `DT_CONTRATACAO` fica no relacionamento, pois depende do par aluno+plano. *Alternativa considerada:* uma entidade CONTRATO/ASSINATURA, útil se a RedFit precisar guardar o histórico de trocas de plano; ficará para a etapa seguinte se o levantamento confirmar essa necessidade.
 
-A utilização de entidades específicas para **UNIDADE**, **EQUIPAMENTO** e **CHECK_IN** também permite representar a operação de uma rede de academias com diversas unidades.
+**PRONTUÁRIO separado (1:1).** Dados de saúde são sensíveis; separá-los permite restringir o acesso e manter o cadastro do aluno livre deles.
 
-O modelo busca garantir:
+**Avaliação e Treino com cardinalidade 1:N.** O DER anterior mostrava 1:1 entre aluno e avaliação e entre aluno e treino, o que impediria registrar a evolução. Um aluno faz várias avaliações e tem vários treinos.
 
-- Organização dos dados;
-- Integridade das informações;
-- Redução de redundância;
-- Facilidade de consulta;
-- Facilidade de manutenção;
-- Possibilidade de expansão futura;
-- Separação adequada das responsabilidades de cada entidade.
+**INSTRUTOR ligado a avaliação e treino.** O levantamento indica que a avaliação é feita por instrutor e que treinos são montados por profissional; antes o instrutor só se ligava ao treino. *Alternativa considerada:* generalizar INSTRUTOR e RECEPCIONISTA em uma entidade FUNCIONARIO (ambos têm nome, CPF e telefone). Mantivemos duas entidades porque os atributos e as responsabilidades diferem (CREF, especialidade); a generalização pode ser revista no modelo lógico.
+
+**EQUIPAMENTO, EXERCÍCIO e UNIDADE.** O DER anterior tinha a relação exercício–aparelho como N:M e um atributo `ID_EXERCICIO` dentro de APARELHO (chave estrangeira não pertence ao modelo conceitual). Adotamos: equipamento (tipo) 1:N exercício, opcional, e `grupo_muscular` em EXERCICIO, pois é o exercício que trabalha o músculo. Como a rede tem 26 unidades, EQUIPAMENTO é um catálogo de tipos e a relação N:M com UNIDADE guarda a quantidade.
+
+**CHECK_IN, PAGAMENTO e UNIDADE.** Essas entidades estavam no levantamento (acessos por digital, facial e parceiro; pagamentos; 26 unidades), mas não apareciam no DER. Foram incluídas para que o modelo represente a operação real de uma rede.
+
+**Nomenclatura.** Um único padrão de prefixos (seção 5) em todos os atributos.
 
 ---
 
 # 9. Uso de Inteligência Artificial
 
-A Inteligência Artificial foi utilizada como ferramenta de apoio durante o desenvolvimento do projeto, principalmente para auxiliar na organização das informações, identificação de entidades, definição de atributos e revisão da estrutura do modelo.
+O grupo utilizou a ferramenta de IA **Claude** (Anthropic), registrada abaixo. Campos `[PREENCHER]` devem ser completados pelo grupo com o que de fato aconteceu.
 
-## 9.1 Ferramenta utilizada
+## 9.1 Uso 1 — Claude: levantamento inicial (entidades, atributos, dicionário, regras)
 
-**Ferramenta:** ChatGPT e Cloude.
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | Claude — organização das informações levantadas, identificação de entidades, sugestão de atributos, dicionário de dados e regras de negócio. |
+| Motivação | Estruturar rapidamente o material do levantamento em entidades, atributos e regras. |
+| Prompts utilizados | "Com base nas informações levantadas sobre uma rede de academias, identifique as principais entidades necessárias para um banco de dados." · "Crie um dicionário de dados preliminar contendo entidade, atributo, descrição e regra de negócio." · "Analise as entidades e relacionamentos de um modelo conceitual de banco de dados para uma academia." · "Identifique possíveis inconsistências ou informações que precisam ser validadas antes da criação do DER." `[PREENCHER: conferir se são os textos exatos]` |
+| Resposta recebida | `[PREENCHER: resumo do que a IA devolveu — entidades, atributos, regras]` |
+| Fontes consultadas e verificadas | `[PREENCHER: como o grupo comparou as respostas com o levantamento/visita]` |
+| Trechos rejeitados ou corrigidos | `[PREENCHER]` |
+| Justificativa da escolha final | `[PREENCHER]` |
+| Reflexão crítica | O README gerado nesta fase e o DER desenhado pelo grupo divergiam (o README tinha entidades como Unidade, Check-in e Pagamento que não estavam no DER). Isso mostra o risco de aceitar a resposta da IA sem conferir com o produto do grupo. |
+## 9.2 Uso 2 — ChatGPT: revisão do arquivo HTML do dicionário
 
-## 9.2 Etapas em que a IA foi utilizada
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | ChatGPT — reorganização do HTML da Entrega 1 conforme o esqueleto, incorporando o DER. |
+| Motivação | Organizar o material em um único HTML seguindo a estrutura exigida. |
+| Prompts utilizados | Pedido para usar a imagem do DER, corrigir o HTML existente e seguir o esqueleto da Entrega 1. `[PREENCHER: texto exato]` |
+| Resposta recebida | HTML reorganizado nas nove seções, com o DER e um dicionário alinhado às 9 entidades da imagem. |
+| Fontes consultadas e verificadas | Esqueleto fornecido pelo professor e imagem do DER. |
+| Trechos rejeitados ou corrigidos | Foram descartadas tabelas de entidades que não estavam no DER. |
+| Justificativa da escolha final | Manter fidelidade ao DER então vigente. |
+| Reflexão crítica | O HTML descreveu relacionamentos (ex.: "matricula-se", instrutor "faz" avaliação) que não correspondiam ao desenho. A IA transcreve o que recebe e não detecta erros conceituais do próprio DER. |
 
-A IA foi utilizada para:
+## 9.3 Uso 3 — Claude: revisão e correção da Entrega 1
 
-- Organizar as informações obtidas durante a pesquisa;
-- Identificar possíveis entidades;
-- Sugerir atributos;
-- Auxiliar na elaboração do dicionário de dados;
-- Auxiliar na definição das regras de negócio;
-- Revisar a estrutura do modelo;
-- Identificar possíveis inconsistências.
-
-## 9.3 Exemplos de prompts utilizados
-
-> "Com base nas informações levantadas sobre uma rede de academias, identifique as principais entidades necessárias para um banco de dados."
-
-> "Crie um dicionário de dados preliminar contendo entidade, atributo, descrição e regra de negócio."
-
-> "Analise as entidades e relacionamentos de um modelo conceitual de banco de dados para uma academia."
-
-> "Identifique possíveis inconsistências ou informações que precisam ser validadas antes da criação do DER."
-
-## 9.4 Análise crítica das respostas
-
-As respostas fornecidas pela Inteligência Artificial não foram utilizadas de maneira automática.
-
-As informações foram comparadas com o material obtido durante a pesquisa e os pontos que não estavam confirmados foram identificados para validação.
-
-Durante essa análise foram identificados alguns pontos que precisam ser confirmados, como:
-
-- Nomenclatura atual dos planos;
-- Valores atuais dos planos;
-- Regras de cancelamento;
-- Regras de fidelidade;
-- Benefícios dos planos;
-- Regras relacionadas ao acompanhante;
-- Benefícios relacionados à bioimpedância;
-- Necessidade da entidade de aula/agendamento;
-- Unidade de medida para tempo e intervalo dos exercícios;
-- Existência de determinados campos cadastrais.
-
-## 9.5 Reflexão sobre o uso da IA
-
-A utilização da Inteligência Artificial foi considerada uma ferramenta de apoio ao desenvolvimento do projeto, e não como substituição da análise dos integrantes.
-
-A ferramenta auxiliou na organização e identificação de informações, porém foi necessário analisar criticamente as respostas e comparar as sugestões com os dados levantados durante a pesquisa.
-
-Dessa forma, as decisões finais do modelo devem ser tomadas a partir das informações efetivamente confirmadas sobre a organização.
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | Claude — revisão do README, do dicionário e do DER contra as instruções do professor; redação do README corrigido; geração do novo DER e dos fluxogramas. |
+| Motivação | Identificar inconsistências entre os três arquivos e os critérios do professor antes da entrega. |
+| Prompt utilizado | "chat, esse é nosso trabalho, com base nas instruções do professor, o que está errado o que precisa ser alterado e vc consegue fazer essas alterações pra mim?" (com README, dicionário em HTML e imagem do DER anexados). |
+| Resposta recebida | Lista de erros (DER, README, dicionário, seções ausentes), novo README, novo DER (`DER_RedFit_v2.png`) e cinco fluxogramas. |
+| Fontes consultadas e verificadas | A IA usou apenas os arquivos do grupo. `[PREENCHER: o que o grupo conferiu — ex.: cardinalidades e entidades contra a visita/entrevista]` |
+| Trechos rejeitados ou corrigidos | `[PREENCHER: o que o grupo mudou depois]` |
+| Justificativa da escolha final | `[PREENCHER]` |
+| Reflexão crítica | A IA não tem acesso à organização real. As decisões novas (ex.: PLANO 1:N ALUNO, entidade ITEM_TREINO, EQUIPAMENTO como catálogo, treino como histórico por período) são propostas de modelagem que o grupo precisa validar com o levantamento. Os fluxogramas foram montados a partir do texto dos arquivos e podem não refletir cada passo real da unidade. |
