@@ -64,13 +64,9 @@ Permanecem pendentes os dados de contato e evidências diretas da visita.
 -   Organização: RedFit — unidade Neo Química Arena, Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000.
 -   Perfil da unidade do Google Maps: [Google Maps --- localização/rota da
     unidade](https://www.google.com/maps/place/REDFIT+Academia+-+Neo+Qu%C3%ADmica+Arena+-+SP/@-23.545562,-46.4776382,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce677885731389:0xea7cfb187022485e!8m2!3d-23.5455669!4d-46.4750633!16s%2Fg%2F11hkwwgmhl?entry=ttu&g_ep=EgoyMDI2MTAxOS4wIKXMDSoASAFQAw%3D%3D).
--   Contato e nome/cargo do responsável entrevistado: **\[CONFIRMAR:
-    nome/cargo e contato profissional autorizado não foram
-    fornecidos\]**
--   Data e forma do levantamento: **\[CONFIRMAR: informar data e se foi
-    entrevista, visita, observação ou combinação\]**
--   Fotos da visita: **\[CONFIRMAR: anexar fotos, caso exigidas pelo
-    roteiro\]**
+- Responsável entrevistado: Gerente da Unidade. Nome do profissional autorizado: Guilherme Nogueira. 
+- Forma do levantamento: Entrevista com Guilherme(Gerente), em formato de perguntas e respostas, cobrindo alunos, matrículas e planos, pagamentos, treinos, exercícios, professores, frequência, avaliação física, funcionários e dificuldades atuais do controle de informações. O registro completo está no [entrevista](#apêndice-a--entrevista-com-o-gerente-da-redfit). Data da entrevista: 16/09/2026
+-   Fotos da visita: <img width="1200" height="1600" alt="WhatsApp Image 2026-09-12 at 15 04 19" src="https://github.com/user-attachments/assets/6875dd66-b250-4b93-aa1c-a4d5558f132b" />
 
 ------------------------------------------------------------------------
 
