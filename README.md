@@ -365,13 +365,10 @@ Os atributos de cada entidade e suas regras estão na seção 5. Todos os identi
 - Dados de saúde isolados em entidade própria (LGPD).
 - O histórico de treinos é obtido por novas ocorrências de TREINO com `DT_INICIO`/`DT_FIM`, sem entidade extra.
 
----
 
 # 7. Diagrama Entidade-Relacionamento (DER)
 
-![DER RedFit](imagens/DER_RedFit_v2.png)
-
-*Arquivo: `imagens/DER_RedFit_v2.png`. Notação: retângulo = entidade; losango = relacionamento; elipse = atributo (sublinhado = identificador); elipse tracejada = atributo do relacionamento; 1/N/M = cardinalidade máxima.*
+![DER RedFit](imagens/diagrama_entidade_relacionamento.png)
 
 ## 7.1 Consistência e escalabilidade
 
