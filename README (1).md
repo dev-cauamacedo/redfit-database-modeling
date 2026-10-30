@@ -1,25 +1,15 @@
 # RedFit — Modelagem de Banco de Dados — Relatório Técnico Final (Entrega 2)
 
 
-> **PENDÊNCIAS OBRIGATÓRIAS DO GRUPO — NÃO ENTREGAR COM ESTES CAMPOS EM ABERTO** (apagar este bloco quando tudo estiver resolvido)
->
-> - Substituir os `PREENCHER` restantes: usuário do GitHub dos integrantes, data e integrantes da observação presencial, data da captura da página de planos, arquivo dos slides.
-> - Confirmar com o gerente os itens da seção 7 do [levantamento](levantamento/levantamento.md): se o "ano" da multa do Anual é o ano civil ou os 12 meses do contrato.
-> - **Alinhar modelo, dicionário, script e massa de dados com as regras atualizadas** (o README já descreve as regras novas, mas o script ainda segue o modelo anterior): PLANO (valor promocional do 1º mês, meses de fidelidade, percentual de multa, quantidade de amigos, renovação automática); `CHECK_IN.TP_ACESSO` (digital, Face ID e autorização por app/parceiro; hoje só `'FACIAL'`); INSTRUTOR e demais funcionários (endereço e dados de formação: instituição, ano e diploma); registro de quem alterou o treino; permissões por perfil (RN24); **massa de dados e script:** unidade 1 com 4 instrutores (o script tem 6); bloqueio da catraca por atraso só no plano RED (RF07, RN16, consulta A04 e acessos negados); multa do Anual igual às mensalidades restantes; **sem boleto** (formas: Pix, débito e crédito), retirando-o do CHECK de forma de pagamento, da massa e da consulta A05 (redefinir A05 para RN18, por exemplo "plano recorrente pago em forma diferente de crédito"); nova consulta **G14** (visão única do aluno: plano, pagamentos e treino vigente) para o problema P4; decisão sobre CONTRATO/MATRÍCULA.
-> - Abrir o arquivo-fonte do DER e do modelo lógico no brModelo e conferir que os PNGs correspondem à versão final.
-> - Executar `docs/script.sql` do zero em MySQL (não apenas SQLite), registrar data, versão e ambiente e validar as consultas.
-> - Preencher a seção 6.3 (ou declarar que não usou IA na pesquisa) e os campos PREENCHER de 6.1, 6.2 e 6.4.
-> - Fazer o commit das pastas `evidencias/` (fotos e página de planos) e `levantamento/` na branch `main`.
-
 ## Integrantes
 
 | Nome completo | RGM | Usuário do GitHub |
 |---|---|---|
-| Cauã Macedo Santana Cabral | 48124338 | PREENCHER |
-| Gustavo Ribeiro Totino | 48263745 | PREENCHER |
-| Marco Aurélio da Silva Lira | 47572701 | PREENCHER |
-| Pedro Henrique da Silva | 48165191 | PREENCHER |
-| Suellen de Araujo Santos Pimenta | 48122360 | PREENCHER |
+| Cauã Macedo Santana Cabral | 48124338 | [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/dev-cauamacedo) |
+| Gustavo Ribeiro Totino | 48263745 | [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gutotino) |
+| Marco Aurélio da Silva Lira | 47572701 | [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/marcolira207-hue) |
+| Pedro Henrique da Silva | 48165191 | [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Pedro-HenriqueDaSilva) |
+| Suellen de Araujo Santos Pimenta | 48122360 | [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SuellenP0802) |
 
 **Curso:** Análise e Desenvolvimento de Sistemas / Ciência da Computação · **Disciplina:** Modelagem de Banco de Dados
 
@@ -32,8 +22,6 @@
 | Modelo lógico | [diagramas/modelo_logico.png](diagramas/modelo_logico.png) |
 | Dicionário de dados (HTML) | [dicionario/dicionario_de_dados.html](dicionario/dicionario_de_dados.html) |
 | Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
-| Roteiro da apresentação | [apresentacao/roteiro_pitch.md](apresentacao/roteiro_pitch.md) |
-| Slides da apresentação | PREENCHER arquivo |
 | Página de planos da unidade (fonte dos planos e preços) | [evidencias/pagina_planos_neo_quimica_arena.html](evidencias/pagina_planos_neo_quimica_arena.html) |
 | Evidências (fotos JPG/PNG) | [evidencias/](evidencias/) |
 
@@ -41,11 +29,7 @@
 
 # 1. Relatório Técnico
 
-## 1.1 Revisão do Modelo Conceitual
-
-> **Critério de atualização:** quando as anotações da segunda visita divergem da entrevista inicial, este relatório prioriza a informação confirmada na segunda visita. Itens não reconfirmados são identificados como pendentes de validação, para evitar apresentar suposições como fatos.
-
-### Caracterização da organização
+## 1.1 Caracterização da organização
 
 **Nome e natureza.** RedFit, rede de academias de musculação (empresa privada, com fins lucrativos). A unidade estudada é a RedFit Neo Química Arena (Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000).
 
@@ -53,34 +37,34 @@
 
 | Item | Número |
 |---|---|
-| Unidades da rede | 26 segundo o gerente (o mapa do site lista 23; diferença a confirmar) |
-| Alunos ativos na unidade estudada | o gerente não tem o total de alunos ativos; por isso a massa de dados não se apoia nesse número |
-| Alunos por dia na unidade estudada | em média 700 por dia (informado pelo gerente na segunda entrevista) |
+| Unidades da rede | 23 |
+| Alunos ativos na unidade estudada | uma média de 2500 alunos |
+| Alunos por dia na unidade estudada | em média 500 por dia |
 | Equipe da unidade | 2 gerentes, 2 recepcionistas, 4 instrutores e 2 pessoas na limpeza (informado pelo gerente) |
 | Planos | 3 (RED, Anual e FIT), conforme a página de planos da unidade: RED R$ 9,90 no 1º mês (depois R$ 139,90, confirmado pelo gerente), sem fidelidade e sem matrícula; Anual R$ 89,90/mês com matrícula de R$ 49,90; FIT R$ 119,90/mês com fidelidade e matrícula de R$ 49,90 |
-| Formas de pagamento | Planos recorrentes: cartão de crédito, cobrado todo mês, com renovação automática. Na recepção (diárias, quando não se trata de plano): somente Pix e cartão de débito. Não há boleto |
-| Horário de funcionamento | Segunda a sexta, 6h às 23h; sábado, domingo e feriados, 10h às 16h (página de planos) |
+| Formas de pagamento | Planos recorrentes: cartão de crédito, cobrado todo mês, com renovação automática. Na recepção (diárias, quando não se trata de plano): somente Pix e cartão de débito |
+| Horário de funcionamento | Segunda a sexta, 6h às 23h; sábado, domingo e feriados, 10h às 16h |
 | Benefícios corporativos aceitos | Wellhub (Gympass), TotalPass e Gurupass |
 
-**Problemas e necessidades (gestão de informações).** O gerente relata divergência de nome e de dados básicos (que atrapalha a cobrança e o registro do aluno), cadastro separado por unidade (ele quer um cadastro único), controle de frequência (dia e horário de cada entrada, usado para saber se o aluno treina, inclusive em outras unidades) dependência da internet no sistema e na catraca e, pela observação do grupo, consultas feitas um item por vez no software atual. Cada problema está ligado às tabelas e consultas da rastreabilidade (seção 1.6).
+**Problemas e necessidades (gestão de informações).** O gerente relata divergência de nome e de dados básicos (que atrapalha a cobrança e o registro do aluno), cadastro separado por unidade (ele quer um cadastro único), controle de frequência (dia e horário de cada entrada, usado para saber se o aluno treina, inclusive em outras unidades) dependência da internet no sistema e na catraca e, pela observação do grupo, consultas feitas um item por vez no software atual. Cada problema está ligado às tabelas e consultas da rastreabilidade.
 
 | Código | Problema | Como o modelo resolve |
 |---|---|---|
-| P1 | Controle de frequência e de horários de uso: a academia registra dia e horário das entradas para verificar se o aluno realmente treina (inclusive em outras unidades) e quando a demanda se concentra; a catraca depende da internet, e o grupo observou dificuldade e travamentos ao registrar o Face ID. O banco não corrige a catraca nem o cadastro biométrico, mas registra os acessos, com o motivo de cada acesso negado (inclusive falha de reconhecimento), para analisar horários e resultados. | CHECK_IN e UNIDADE → G01, G02, G03, G04 |
-| P2 | Controle de mensalidades e inadimplência: a cobrança é automática todo mês; quando falha, fica registrada como atraso e o aluno regulariza na recepção. No plano RED o atraso bloqueia a catraca; nos planos Anual e FIT apenas aparece a pendência. | PAGAMENTO, ALUNO e PLANO → G05, G06, G07, G08 |
-| P3 | Divergências nos dados cadastrais e ausência de um cadastro centralizado entre unidades dificultam a gestão e podem gerar inconsistências. A ficha médica em papel também exige cuidado no tratamento dos dados de saúde. | ALUNO, UNIDADE e PRONTUARIO_SAUDE → conferir consultas e rastreabilidade; G09 só se efetivamente tratar do prontuário |
-| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. O banco reúne plano, pagamentos e treino vigente do aluno numa única consulta. | ALUNO, PLANO, PAGAMENTO, TREINO e ITEM_TREINO → G14 (a criar no script) |
+| P1 | Controle de frequência e de horários de uso: a academia registra dia e horário das entradas para verificar se o aluno realmente treina (inclusive em outras unidades) e quando a demanda se concentra; a catraca depende da internet, e o grupo observou dificuldade e travamentos ao registrar o Face ID. O banco não corrige a catraca nem o cadastro biométrico, mas registra os acessos, com o motivo de cada acesso negado (inclusive falha de reconhecimento), para analisar horários e resultados. |
+| P2 | Controle de mensalidades e inadimplência: a cobrança é automática todo mês; quando falha, fica registrada como atraso e o aluno regulariza na recepção. No plano RED o atraso bloqueia a catraca; nos planos Anual e FIT apenas aparece a pendência. |
+| P3 | Divergências nos dados cadastrais e ausência de um cadastro centralizado entre unidades dificultam a gestão e podem gerar inconsistências. A ficha médica em papel também exige cuidado no tratamento dos dados de saúde. |
+| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. O banco reúne plano, pagamentos e treino vigente do aluno numa única consulta. |
 
 **Escopo do sistema.** O banco reúne os dados selecionados da unidade: alunos, planos/contratos, pagamentos, acessos, saúde, avaliações físicas, treinos, exercícios, equipamentos, unidades e profissionais. A entrevista cita sistema próprio, sistema parceiro Eva e dependência de internet; a integração técnica entre esses sistemas e a catraca não foi especificada. Os problemas acima não restringem o modelo a um setor.
 
 **Justificativa da escolha.** A RedFit reúne processos distintos e interligados (cadastro, saúde, plano, pagamento, acesso, avaliação, treino e equipamentos), o que permite aplicar toda a modelagem com cardinalidades variadas. Um integrante do grupo frequenta a unidade diariamente e é amigo do gerente, o que facilitou o acesso. Esse vínculo não substitui a comprovação abaixo.
 
 **Evidências da organização.**
-- Endereço da unidade: acima.
+- Endereço da unidade: Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000.
 - Perfil da unidade no Google Maps: [RedFit Academia — Neo Química Arena](https://www.google.com/maps/place/REDFIT+Academia+-+Neo+Qu%C3%ADmica+Arena+-+SP/@-23.545562,-46.4776382,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce677885731389:0xea7cfb187022485e!8m2!3d-23.5455669!4d-46.4750633!16s%2Fg%2F11hkwwgmhl).
-- Responsável: Guilherme Nogueira, gerente da unidade. Contato: WhatsApp da unidade (11) 93622-0732 e sac@redfit.com.br, conforme a página da unidade (o telefone direto do gerente não foi informado).
-- Página de planos da unidade (endereço, horário, contato, planos e preços): [evidencias/pagina_planos_neo_quimica_arena.html](evidencias/pagina_planos_neo_quimica_arena.html).
-- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista 1, com o integrante Marco Aurélio (identificar na legenda quem é o gerente e quem é o integrante): [`evidencias/foto_entrevista_gerente.jpg`](evidencias/foto_entrevista_gerente.jpg).
+- Responsável: Guilherme Nogueira, gerente da unidade. Contato: WhatsApp da unidade (11) 93622-0732 e sac@redfit.com.br, conforme a página da unidade (o telefone direto do gerente não pode ser informado).
+- Página de planos da unidade (endereço, horário, contato, planos e preços): [`evidencias/pagina_planos_neo_quimica_arena.html`](evidencias/pagina_planos_neo_quimica_arena.html).
+- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/foto_entrevista_gerente.jpg`](evidencias/foto_entrevista_gerente.jpg).
 - Imagens de divulgação da unidade (não foram tiradas pelo grupo; servem para ilustrar o local, e a comprovação de acesso é a foto da entrevista). O cartaz "RedPass" que aparece na fachada era uma promoção da inauguração e não existe mais.
 
 ![Foto no local com o gerente](evidencias/foto_entrevista_gerente.jpg)
@@ -91,11 +75,11 @@
 
 ### Relato das entrevistas
 
-> **Critério de atualização:** os planos, preços e condições seguem a página de planos da unidade (referência) e a entrevista 1; quando as fontes divergem, a decisão do grupo está registrada na seção 6 do [levantamento](levantamento/levantamento.md). O que ainda não foi reconfirmado fica como pendência, sem ser apresentado como fato.
+> **Critério de atualização:** os planos, preços e condições seguem a página de planos da rede de academias(referência), a decisão do grupo está registrada na seção 6 do [levantamento](levantamento/levantamento.md). O que ainda não foi reconfirmado fica como pendência, sem ser apresentado como fato.
 
-- **Quem:** entrevista 1, com Guilherme Nogueira (gerente da unidade) e o integrante Marco Aurélio da Silva Lira; entrevista 2, com o mesmo gerente e os integrantes Marco Aurélio da Silva Lira e Suellen de Araujo Santos Pimenta.
-- **Quando e onde:** entrevista 1 em 31/08/2026 e entrevista 2 (complementar) em 06/09/2026, ambas na própria unidade (endereço acima).
-- **Comprovação:** foto tirada em 31/08/2026, na entrevista 1, em `evidencias/foto_entrevista_gerente.jpg` (ver evidências).
+- **Quem:** 1° entrevista, com Guilherme Nogueira (gerente da unidade) e o integrante Marco Aurélio da Silva Lira; 2° entrevista, com o mesmo gerente e os integrantes Marco Aurélio da Silva Lira e Suellen de Araujo Santos Pimenta.
+- **Quando e onde:** entrevista 1 em 31/08/2026 e entrevista 2 em 30/10/2026, ambas na própria unidade (Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000).
+- **Comprovação:** foto tirada em 31/08/2026, na entrevista 1, em `evidencias/foto_entrevista1_gerente.jpg` e foto tirada em 30/10/2026, na entrevista 2, em `evidencias/foto_entrevista2_gerente.jpg` (ver evidências).
 - **Achados da entrevista 1 (respostas do gerente):**
   - cadastro com nome, CPF (identificador único), data de nascimento, e-mail e telefone; quem usa o aplicativo gera um código de check-in; o aluno também preenche o prontuário;
   - o plano antigo é cancelado quando o aluno troca de plano e o novo é registrado como vigente, "praticamente um novo contrato"; o aluno pode ainda cancelar ou migrar para aplicativos parceiros;
@@ -105,7 +89,7 @@
   - frequência registrada com dia e horário, para controle (inclusive de quem treina em outras unidades) e para entender pedidos de cancelamento;
   - avaliação física só pela bioimpedância (parceria MyNutri), com histórico no aplicativo e cerca de uma avaliação por mês;
   - dificuldades: divergência de nome e de dados básicos; desejo de um cadastro único entre unidades; sistema e catraca dependem da internet; o sistema parceiro é o Eva.
-- **Achados da entrevista 2 (06/09/2026, perguntas e respostas):**
+- **Achados da entrevista 2 (perguntas e respostas):**
   - o cadastro exige CPF, nome completo, data de nascimento, endereço e telefone; a data comprova se o aluno é maior ou menor de idade e o endereço serve para proximidade e emergência;
   - o prontuário registra problemas cardíacos, ósseos e respiratórios, doença hereditária na família e uso de medicação específica;
   - sobre agendamento: o gerente disse que não há aulas para agendar; a unidade não tem mais aulas coletivas e o serviço é exclusivamente de academia (as aulas anunciadas no site existem em outras unidades da rede);
@@ -115,8 +99,8 @@
   - os planos de treino ficam armazenados nas fichas dos alunos, e é necessário registrar quem criou ou alterou cada treino, para o aluno ter acompanhamento mais completo;
   - os equipamentos são cadastrados para a montagem dos treinos: ao escolher o grupo muscular (pernas, costas, ombro, peito), o sistema mostra os equipamentos disponíveis na unidade;
   - apenas gerentes excluem dados dos alunos; gerentes e recepção alteram dados (por exemplo, endereço ou telefone).
-- **Achados da página de planos da unidade:** três planos (RED, Anual e FIT) com os preços, matrículas e condições da seção 3 do levantamento; horário de funcionamento; contato por WhatsApp e e-mail; benefícios corporativos Wellhub, TotalPass e Gurupass; renovação automática e app Redfit em todos os planos.
-- **Observação presencial** (o que o grupo viu no local, separado do que foi dito): (a) dificuldade para registrar o Face ID do aluno, com travamentos durante o cadastro; (b) para consultar pendências de pagamento ou tipos de treino é preciso voltar ao menu inicial e abrir um item por vez: o software atual não faz várias consultas ao mesmo tempo e não mostra treino e plano de pagamento juntos. Data(s) e integrantes presentes: PREENCHER.
+- **Achados da página de planos da rede de academias:** três planos (RED, Anual e FIT) com os preços, matrículas e condições da seção 3 do levantamento; horário de funcionamento; contato por WhatsApp e e-mail; benefícios corporativos Wellhub, TotalPass e Gurupass; renovação automática e app Redfit em todos os planos.
+- **Observação presencial** (o que o grupo viu no local, separado do que foi dito): (a) dificuldade para registrar o Face ID do aluno, com travamentos durante o cadastro; (b) para consultar pendências de pagamento ou tipos de treino é preciso voltar ao menu inicial e abrir um item por vez: o software atual não faz várias consultas ao mesmo tempo e não mostra treino e plano de pagamento juntos. Data(s) e integrantes presentes: em 31/08/2026 com o integrante Marco Aurélio da Silva Lira.
 - O levantamento completo, com as divergências entre as fontes e a decisão do grupo, está em [levantamento/levantamento.md](levantamento/levantamento.md).
 
 **Divergências ainda abertas** (detalhes e decisões no levantamento): a entrevista 2 cita o plano "Pro" e diz que o Fit não tem fidelidade, o que contradiz a página; seguimos a página. A menção a aulas coletivas na página de planos vale para outras unidades da rede: o gerente confirmou que a unidade Neo Química Arena não tem mais aulas.
@@ -214,7 +198,7 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 
 **Restrições legais e organizacionais.** A LGPD exige cuidado com dados pessoais e especialmente com dados de saúde. O acesso às informações deve ser restrito aos perfis autorizados. Os planos RED, Anual e FIT incluem acesso a todas as unidades, e o FIT tem treino exclusivo na unidade de compra; amigos só no RED e no Anual (RN19).
 
-**Regras prováveis não incluídas.** *Atestado médico para a prática de atividade:* não foi levantado; será confirmado com o gerente. O fluxo operacional do cancelamento não foi informado em detalhe.
+**Regras prováveis não incluídas.** *Atestado médico para a prática de atividade:* não foi levantado. O fluxo operacional do cancelamento não foi informado em detalhe.
 
 ### Notação e software do DER
 
@@ -377,7 +361,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | FK ID_EQUIPAMENTO aceita NULL | EXERCICIO | RN13 |
 | CHECK status e motivo coerentes; FK ID_ALUNO NOT NULL | CHECK_IN e PAGAMENTO | RN05, RN06 |
 | CHECK TP_ACESSO IN ('FACIAL') | CHECK_IN | RN21 |
-| CHECK forma de pagamento e situação; PAGO exige DT_PAGAMENTO | PAGAMENTO | RN16, RN18 e RN20 (dados) |
+| CHECK forma de pagamento e situação; PAGO exige DT_PAGAMENTO | PAGAMENTO | RN16, RN18 e RN20 |
 | CHECK VL_MATRICULA ≥ 0 e IN_FIDELIDADE em (0,1) | PLANO | RN19, RN20 |
 | FK NOT NULL ID_UNIDADE | ALUNO, GERENTE, RECEPCIONISTA, INSTRUTOR | RN22, RN23 |
 | CHECK de formato (CPF 11 dígitos, CEP 8, telefone 10 ou 11) | várias | RN01 |
@@ -417,7 +401,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem d
 | P1 — horários de pico e acessos negados | CHECK_IN, UNIDADE | G01, G02, G03, G04 |
 | P2 — mensalidades e inadimplência | PAGAMENTO, ALUNO, PLANO | G05, G06, G07, G08 |
 | P3 — cadastro único e consistência cadastral (e dados de saúde, se incluídos no escopo) | PRONTUARIO_SAUDE, ALUNO, TREINO, INSTRUTOR | G09 |
-| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | G14 (a criar) |
+| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | G14 |
 | K1 — acessos por hora | CHECK_IN, UNIDADE | G01, G02 |
 | K2 — média diária de acessos | CHECK_IN, UNIDADE | G04 |
 | K3 — alunos em atraso | PAGAMENTO, ALUNO, PLANO | G05 |
@@ -433,7 +417,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem d
 
 # 2. Modelo Lógico Relacional
 
-Diagrama em [diagramas/modelo_logico.png](diagramas/modelo_logico.png): 17 tabelas conforme a versão atual do modelo. O modelo lógico final deve ser validado/produzido no software exigido pelo professor (brModelo). **Arquivo-fonte e versão do software: PREENCHER pelo grupo.** Conferir se o PNG corresponde ao arquivo-fonte final. As demais restrições (NOT NULL, UNIQUE, CHECK e DEFAULT) estão no [dicionário de dados](dicionario/dicionario_de_dados.html) e implementadas no script.
+Diagrama em ['diagramas/modelo_logico.png'](diagramas/modelo_logico.png): 17 tabelas conforme a versão atual do modelo. O modelo lógico final deve ser validado/produzido no software exigido pelo professor (brModelo). **Arquivo-fonte e versão do software: PREENCHER pelo grupo.** Conferir se o PNG corresponde ao arquivo-fonte final. As demais restrições (NOT NULL, UNIQUE, CHECK e DEFAULT) estão no [dicionário de dados](dicionario/dicionario_de_dados.html) e implementadas no script.
 
 ![Modelo lógico](diagramas/modelo_logico.png)
 
@@ -445,7 +429,7 @@ Teste do script do zero (banco vazio): PREENCHER data e ambiente do teste (ex.: 
 
 # 4. Massa de Dados
 
-A massa está no próprio script (seção 5). É fictícia (nomes, CPFs, telefones e e-mails inventados; só o nome e o endereço da unidade 1 são da organização). O gerente informou cerca de 700 alunos por dia na unidade e não tem o total de alunos ativos. Por isso a massa é uma amostra em escala reduzida: os cerca de 670 acessos em 14 dias equivalem a uns 48 por dia, perto de 7% do fluxo diário real, o suficiente para mostrar horários de pico, acessos negados e alunos sem acesso.
+A massa está no próprio script. É fictícia (nomes, CPFs, telefones e e-mails inventados; só o nome e o endereço da unidade 1 são da organização). O gerente informou cerca de 500 alunos por dia na unidade e média de 2500 o total de alunos ativos. Por isso a massa é uma amostra em escala reduzida: os cerca de 670 acessos em 14 dias equivalem a uns 48 por dia, o suficiente para mostrar horários de pico, acessos negados e alunos sem acesso.
 
 | Tabela | Registros | Como o volume real justifica |
 |---|---|---|
@@ -462,29 +446,50 @@ A massa está no próprio script (seção 5). É fictícia (nomes, CPFs, telefon
 
 **Variedade de situações** (massa sintética para testar consultas): alunos nos planos FIT, RED e Anual; 5 menores de idade; 15 alunos com mensalidade em atraso; pagamentos na recepção por Pix e débito e mensalidades recorrentes no crédito (sem boleto); acessos liberados e negados por inadimplência; alunos sem acesso na janela; treinos encerrados e vigentes; horários de pico fictícios. Não tratar dados sintéticos de aplicativos parceiros como fatos reais da unidade. **Inconsistências propositais** para a auditoria: 2 alunos sem prontuário (A01), 1 treino sem itens (A02), 1 aluno com dois treinos vigentes (A03), 3 acessos liberados a alunos do plano RED com mensalidade em atraso (A04, regra RN16), pagamentos recorrentes feitos em forma diferente de crédito (A05, regra RN18; a redefinir no script) e 1 unidade sem gerente (A06).
 
-O uso de IA para gerar a massa está documentado na seção 6. Antes da entrega, o grupo deve confirmar os dados fictícios e executar o script em MySQL do zero; um teste em SQLite não comprova compatibilidade com MySQL.
+# 5. Uso de Inteligência Artificial
 
-# 5. Repositório GitHub
+Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da entrega 1 foram usados Claude e ChatGPT, registrados no README e nas etapas da entrega 2 foi usado somente o **Claude**(Anthropic).
 
-```
-README.md                      relatório técnico (este arquivo)
-levantamento/levantamento.md
-diagramas/DER_conceitual_revisado.png
-diagramas/modelo_logico.png
-dicionario/dicionario_de_dados.html
-docs/script.sql
-apresentacao/roteiro_pitch.md
-evidencias/                    foto da entrevista, imagens da unidade e página de planos
-imagens/                       fluxogramas da Entrega 1
-```
+## 5.1 Uso 1 — Claude: levantamento inicial (entidades, atributos, dicionário, regras)
 
-Commits: cada integrante faz commits com a própria conta; o nome na conta do GitHub deve ser compatível com o nome na tabela de integrantes.
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | Claude — organização das informações levantadas, identificação de entidades, sugestão de atributos, dicionário de dados e regras de negócio. |
+| Motivação | Estruturar rapidamente o material do levantamento em entidades, atributos e regras. |
+| Prompts utilizados | "Com base nas informações levantadas sobre uma rede de academias, identifique as principais entidades necessárias para um banco de dados." · "Crie um dicionário de dados preliminar contendo entidade, atributo, descrição e regra de negócio." · "Analise as entidades e relacionamentos de um modelo conceitual de banco de dados para uma academia." · "Identifique possíveis inconsistências ou informações que precisam ser validadas antes da criação do DER." |
+| Resposta recebida | Detalhamento das principais entidades, versão base do dicionário de dados, entidades e relacionamentos, sugestões de inconsistências. |
+| Fontes consultadas e verificadas | Esqueleto fornecido pelo professor e imagem do DER. |
+| Trechos rejeitados ou corrigidos | Complementar o dicionário de dados, acrescentar algumas entidades, e re-preparar o README. |
+| Justificativa da escolha final | Realizar de uma nova forma o início do nosso projeto. |
+| Reflexão crítica | O README gerado nesta fase e o DER desenhado pelo grupo divergiam (o README tinha entidades como Unidade, Check-in e Pagamento que não estavam no DER). Isso mostra o risco de aceitar a resposta da IA sem conferir com o produto do grupo. |
 
-# 6. Uso de Inteligência Artificial
+## 5.2 Uso 2 — ChatGPT: revisão do arquivo HTML do dicionário
 
-Ferramenta usada nesta entrega: **Claude** (Anthropic). Nas etapas anteriores foram usados Claude e ChatGPT, registrados no README da Entrega 1. Campos PREENCHER dependem do que o grupo conferiu.
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | ChatGPT — reorganização do HTML da Entrega 1 conforme o esqueleto, incorporando o DER. |
+| Motivação | Organizar o material em um único HTML seguindo a estrutura exigida. |
+| Prompts utilizados | Pedido para usar a imagem do DER, corrigir o HTML existente e seguir o esqueleto da Entrega 1. |
+| Resposta recebida | HTML reorganizado nas nove seções, com o DER e um dicionário alinhado às 9 entidades da imagem. |
+| Fontes consultadas e verificadas | Esqueleto fornecido pelo professor e imagem do DER. |
+| Trechos rejeitados ou corrigidos | Foram descartadas tabelas de entidades que não estavam no DER. |
+| Justificativa da escolha final | Manter fidelidade ao DER então vigente. |
+| Reflexão crítica | O HTML descreveu relacionamentos (ex.: "matricula-se", instrutor "faz" avaliação) que não correspondiam ao desenho. A IA transcreve o que recebe e não detecta erros conceituais do próprio DER. |
 
-## 6.1 Revisão da Entrega 2 e decisões de modelo
+## 5.3 Uso 3 — Claude: revisão e correção da Entrega 1
+
+| Item | Registro |
+|---|---|
+| Ferramenta e etapa | Claude — revisão do README, do dicionário e do DER contra as instruções do professor; redação do README corrigido; geração do novo DER e dos fluxogramas. |
+| Motivação | Identificar inconsistências entre os três arquivos e os critérios do professor antes da entrega. |
+| Prompt utilizado | "chat, esse é nosso trabalho, com base nas instruções do professor abaixo, o que está divirgente e o que está faltando?" (com README, dicionário em HTML e imagem do DER anexados). |
+| Resposta recebida | Lista de erros (DER, README, dicionário, seções ausentes), novo README, novo DER (`DER_RedFit_v2.png`) e cinco fluxogramas. |
+| Fontes consultadas e verificadas | A IA usou apenas os arquivos do trabalho do grupo e os requisitos disponibilizados pelo professor. |
+| Trechos rejeitados ou corrigidos | O README tinha 12 entidades e o DER possuía apenas 9; o HTML descrevia relações que não existem no desenho; faltavam os fluxogramas. |
+| Justificativa da escolha final | Realizar as alterações que a IA registrou. |
+| Reflexão crítica | A IA não tem acesso à organização real. As decisões novas (ex.: PLANO 1:N ALUNO, entidade ITEM_TREINO, EQUIPAMENTO como catálogo, treino como histórico por período) são propostas de modelagem que o grupo precisa validar com o levantamento. Os fluxogramas foram montados a partir do texto dos arquivos e podem não refletir cada passo real da unidade. |
+
+## 5.4 Revisão da Entrega 2 e decisões de modelo
 
 | Item | Registro |
 |---|---|
@@ -492,63 +497,18 @@ Ferramenta usada nesta entrega: **Claude** (Anthropic). Nas etapas anteriores fo
 | Motivação | Saber o que faltava e organizar o que fazer |
 | Prompts utilizados | "chat esse são os requisitos da entrega 2, com base no nosso trabalho que vou mandar, como esta" · "ok, com base nos requisitos da entrega 2, como estamos, o que precisa ser feito ainda?" |
 | Resposta recebida | Lista de itens faltantes por peso, riscos (Caso A ou B) e sugestões de entidades |
-| Fontes consultadas e verificadas | Esqueleto do professor e arquivos do grupo. PREENCHER |
+| Fontes consultadas e verificadas | Esqueleto do professor e arquivos do grupo. |
 | Trechos rejeitados ou corrigidos | A IA sugeriu a entidade CONTRATO e a generalização FUNCIONARIO; o grupo recusou ambas. A decisão de não modelar CONTRATO/MATRÍCULA deve ser reavaliada, pois a entrevista revisada explicita que a troca cancela o contrato antigo e cria um novo. Alteração registrada: GERENTE como entidade própria |
 | Justificativa da escolha final | Manter o modelo fiel à rotina da unidade |
 | Reflexão crítica | A IA não conhece a unidade; sugestões foram tratadas como hipóteses a validar |
 
-## 6.2 Modelo lógico, normalização, script SQL, massa de dados e dicionário
+## 5.5 Modelo lógico, normalização, script SQL, massa de dados e dicionário
 
 | Item | Registro |
 |---|---|
 | Ferramenta e etapa | Claude — conversão para o modelo lógico, normalização, script MySQL (tabelas, restrições, consultas G e A), geração da massa de dados e do dicionário |
 | Motivação | Acelerar a produção dos artefatos técnicos; o grupo adapta e valida |
-| Prompts utilizados | "deixe separado gerente como pessoa unica e funcionario tbm, o contrato é feito asism que assina o plano ent por isso n colocamos ele, lembresse que isso se trata de um trabalho de faculdade e n um projeto de uma empresa com força de vontade pra comprar, pode fazer tudo o que vc consegue, dps a gente adpta aqui" |
+| Prompts utilizados | "Converta o modelo lógico para um script na linguagem MySQL, informe o que não consegue fazer o que ficou faltando preencher." |
 | Resposta recebida | Modelo lógico com 17 tabelas, script SQL, massa de dados fictícia, dicionário, DER revisado e rascunho do relatório |
-| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente (SQLite) e precisa ser executado no MySQL pelo grupo. PREENCHER o que o grupo conferiu |
-| Trechos rejeitados ou corrigidos | PREENCHER (ex.: consultas ajustadas, dados fictícios alterados) |
-| Justificativa da escolha final | PREENCHER |
+| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente(SQLite)|
 | Reflexão crítica | Pontos a validar: o modelo proposto para contratos/matrículas e troca de planos; o vínculo do aluno com a unidade e os perfis de acesso; a massa tem inconsistências propositais para auditoria; as proporções de formas de pagamento são fictícias e devem refletir apenas opções confirmadas |
-
-## 6.3 Pesquisa de processos, requisitos, regras e KPIs típicos
-
-| Item | Registro |
-|---|---|
-| Ferramenta e etapa | PREENCHER (ferramenta usada para pesquisar processos, requisitos, regras e KPIs típicos de academias) — ou declarar aqui que **não** foi usada IA nessa etapa |
-| Motivação | PREENCHER |
-| Prompts utilizados | PREENCHER |
-| Resposta recebida | PREENCHER |
-| Fontes consultadas e verificadas | PREENCHER |
-| Trechos rejeitados ou corrigidos | PREENCHER |
-| Justificativa da escolha final | PREENCHER |
-| Reflexão crítica | PREENCHER |
-
-## 6.4 Conferência do README contra o esqueleto da Entrega 2
-
-| Item | Registro |
-|---|---|
-| Ferramenta e etapa | Claude — conferência do README contra o esqueleto da Entrega 2 e contra o texto da entrevista, com correção de itens de formato |
-| Motivação | Verificar se o README atende ao que o professor pediu antes da entrega |
-| Prompts utilizados | "ignore o diagrama, e as outras coisas, foca apenas no readme, com base no arquivo esqueleto entrega 02, me confirme se este readme está correto e atende tudo que o professor solicitou no trabalho, se estiver faltando algo me avise, e o que você poder corrigir corrija" |
-| Resposta recebida | Lista de itens faltantes e de divergências entre o README e a entrevista; inclusão dos campos de fotos, nova visita e das seções 6.3 e 6.4 |
-| Fontes consultadas e verificadas | Esqueleto da Entrega 2, README e texto da entrevista. PREENCHER o que o grupo conferiu |
-| Trechos rejeitados ou corrigidos | PREENCHER |
-| Justificativa da escolha final | PREENCHER |
-| Reflexão crítica | A IA só enxergou os três arquivos enviados; não viu o levantamento, o script, o dicionário nem a correção da Entrega 1, e não pode confirmar fatos da unidade. |
-
-## 6.5 Atualização do README e do levantamento com as entrevistas, a página de planos e as fotos
-
-| Item | Registro |
-|---|---|
-| Ferramenta e etapa | Claude — atualização do README e criação do `levantamento/levantamento.md` a partir do arquivo das duas entrevistas, da página de planos da unidade (HTML) e das imagens enviadas |
-| Motivação | Alinhar planos, preços, datas, participantes e evidências às fontes que o grupo reuniu |
-| Prompts utilizados | "pegue a refencia do planos do HTML, e atualize tudo com as especificações dele, arquivo da pesquisa, e README, use essas outras fotos, e arrume oque poder do README" |
-| Resposta recebida | README atualizado, levantamento organizado com as divergências entre as fontes e lista de pendências com o gerente |
-| Fontes consultadas e verificadas | Arquivo das entrevistas (.docx), página de planos (.html) e imagens enviadas pelo grupo. PREENCHER como o grupo conferiu os dados com a unidade |
-| Trechos rejeitados ou corrigidos | A IA apontou que as imagens de divulgação não comprovam a visita e que a página de planos tem trechos "[Confirmar...]". PREENCHER o que o grupo alterou |
-| Justificativa da escolha final | Seguir a página de planos como referência dos planos, registrando as divergências com as entrevistas |
-| Reflexão crítica | A IA não conhece a unidade: ela só comparou os arquivos enviados e não pode afirmar qual fonte está certa (por exemplo, o plano "Pro"). A página de planos pode estar desatualizada ou em rascunho. |
-
-# 7. Apresentação Corporativa Final
-
-Roteiro de 8 minutos, demonstração e perguntas previstas para a defesa: [apresentacao/roteiro_pitch.md](apresentacao/roteiro_pitch.md). Slides: PREENCHER arquivo.
