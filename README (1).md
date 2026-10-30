@@ -17,13 +17,14 @@
 
 | Artefato | Arquivo |
 |---|---|
-| Levantamento (entrevista e observação) | [levantamento/levantamento.md](levantamento/levantamento.md) |
-| DER conceitual revisado | [diagramas/DER_conceitual_revisado.png](diagramas/DER_conceitual_revisado.png) |
-| Modelo lógico | [diagramas/modelo_logico.png](diagramas/modelo_logico.png) |
-| Dicionário de dados (HTML) | [dicionario/dicionario_de_dados.html](dicionario/dicionario_de_dados.html) |
-| Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
-| Página de planos da unidade (fonte dos planos e preços) | [evidencias/pagina_planos_neo_quimica_arena.html](evidencias/pagina_planos_neo_quimica_arena.html) |
+| Levantamento (entrevista e observação) | [levantamento/](levantamento/levantamento.md) |
+| DER conceitual revisado | [diagramas/](diagramas/DER_conceitual_revisado.png) |
+| Modelo lógico | [diagramas/](diagramas/modelo_logico.png) |
+| Dicionário de dados (HTML) | [dicionario/](dicionario/dicionario_de_dados.html) |
+| Script SQL completo (MySQL) com massa de dados | [docs/](docs/script.sql) |
+| Página de planos da unidade (fonte dos planos e preços) | [evidencias/](evidencias/pagina_planos_neo_quimica_arena.html) |
 | Evidências (fotos JPG/PNG) | [evidencias/](evidencias/) |
+| Slides da apresentação | [apresentação/](docs/script.sql) |
 
 ---
 
@@ -229,9 +230,9 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | grupo_muscular e equipamento em APARELHO | DS_GRUPO_MUSCULAR em EXERCICIO; EQUIPAMENTO é catálogo | O exercício trabalha o músculo |
 | README e DER divergentes (PAGAMENTO, UNIDADE, CHECK_IN, ITEM_TREINO ausentes) | 14 entidades no conceitual, iguais no README, no dicionário e no DER | Consistência |
 | "Aula/Treino" e "Aparelho" | TREINO e EQUIPAMENTO | A RedFit não tem aulas |
-| CONTRATO/MATRÍCULA ausente (decisão provisória a reavaliar) | O modelo atual registra plano e data de contratação em ALUNO, sem entidade própria de contrato/matrícula | A entrevista afirma que a troca cancela o contrato anterior e cria um novo; sem entidade própria, o histórico de planos/contratos e suas datas/condições pode se perder. O grupo deve criar CONTRATO/MATRÍCULA ou justificar formalmente a limitação antes da entrega |
+| CONTRATO/MATRÍCULA| O modelo atual registra plano e data de contratação em ALUNO, sem entidade própria de contrato/matrícula | Não foi colocado uma entidade como contrato/matricula pois o gerente não possuía as informações sobre esses casos, pois isso é resolvido diretamente com a rede de academias e não com os funcionarios da unidade |
 | Justificativa técnica sem alternativas | Seção 1.5 com alternativas e regras citadas | Defender as decisões |
-| Uso de IA sem os 8 itens | Seção 6 com os itens por uso | Documentação obrigatória |
+| Uso de IA sem os 8 itens | Seção 5 com os itens por uso | Documentação obrigatória |
 | HTML com notas de IA não revisadas | Notas removidas; dicionário em HTML único | Entrega profissional |
 
 **Mudanças feitas nesta entrega (revisão para o modelo lógico).**
@@ -369,7 +370,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 
 As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem de ação humana (RN17) não cabem em CHECK; são verificadas pelas consultas de auditoria A01 a A06.
 
-**Decisões arquiteturais.** (1) Catálogos (PLANO, EXERCICIO, EQUIPAMENTO) separados dos registros que se repetem. (2) A preservação do histórico de treinos é uma melhoria do modelo, pois a entrevista diz que o treino antigo geralmente é retirado. (3) Situação de atraso derivada, não gravada. (4) Dados de saúde em tabelas próprias, com controle de acesso e atenção à LGPD. (5) A ausência de CONTRATO/MATRÍCULA é uma decisão provisória que precisa ser defendida: a entrevista informa troca de plano, cancelamento e criação de novo contrato/matrícula. Sem entidade própria, o modelo atual pode não representar o histórico de contratos e condições por período. O grupo deve justificar formalmente essa limitação ou modelar CONTRATO/MATRÍCULA.
+**Decisões arquiteturais.** (1) Catálogos (PLANO, EXERCICIO, EQUIPAMENTO) separados dos registros que se repetem. (2) A preservação do histórico de treinos é uma melhoria do modelo, pois a entrevista diz que o treino antigo geralmente é retirado. (3) Situação de atraso derivada, não gravada. (4) Dados de saúde em tabelas próprias, com controle de acesso e atenção à LGPD.
 
 ## 1.6 Proposta de Arquitetura Analítica para BI e IA
 
@@ -509,6 +510,6 @@ Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da
 | Ferramenta e etapa | Claude — conversão para o modelo lógico, normalização, script MySQL (tabelas, restrições, consultas G e A), geração da massa de dados e do dicionário |
 | Motivação | Acelerar a produção dos artefatos técnicos; o grupo adapta e valida |
 | Prompts utilizados | "Converta o modelo lógico para um script na linguagem MySQL, informe o que não consegue fazer o que ficou faltando preencher." |
-| Resposta recebida | Modelo lógico com 17 tabelas, script SQL, massa de dados fictícia, dicionário, DER revisado e rascunho do relatório |
-| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente(SQLite)|
+| Resposta recebida | Modelo lógico com 17 tabelas, script SQL, massa de dados fictícia, dicionário e rascunho do relatório |
+| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente(SQLite), o grupo testou em MySQL e funcionou apenas na versão 8.0.16 ou superior|
 | Reflexão crítica | Pontos a validar: o modelo proposto para contratos/matrículas e troca de planos; o vínculo do aluno com a unidade e os perfis de acesso; a massa tem inconsistências propositais para auditoria; as proporções de formas de pagamento são fictícias e devem refletir apenas opções confirmadas |
