@@ -123,7 +123,7 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 **Processos prováveis não incluídos e por quê.**
 - *Aulas coletivas e agendamento:* o gerente informou que a unidade não tem mais aulas coletivas; só há treinos. A página de planos cita as aulas porque outras unidades da rede as oferecem. Por isso o processo não faz parte do escopo.
 - *Compra e manutenção de equipamentos:* não foram levantados nesta unidade; a quantidade de aparelhos é registrada, mas o processo de compra e manutenção será confirmado com o gerente e não faz parte do escopo desta entrega.
-- *Cancelamento de plano:* as regras são tratadas em RN20 (RED com aviso de 30 dias; FIT com fidelidade de 12 meses e multa de 20% sobre os meses restantes; Anual com multa igual às mensalidades restantes). O fluxo operacional completo não foi informado, e o cancelamento não tem tabela própria enquanto CONTRATO/MATRÍCULA não for modelado.
+- *Cancelamento de plano:* as regras comerciais são tratadas em RN20 (RED com aviso de 30 dias; FIT com fidelidade de 12 meses e multa de 20% sobre os meses restantes; Anual com multa igual às mensalidades restantes). Para esta entrega, o registro da contratação e da vinculação do plano será representado provisoriamente em ALUNO, pelos campos ID_PLANO e DT_CONTRATACAO, sob a denominação conceitual de **MATRÍCULA/CONTRATO**. Essa solução permite identificar o plano vigente e a data da contratação, mas não mantém o histórico de contratos anteriores, solicitações de cancelamento ou trocas de plano. A limitação fica registrada porque o fluxo administrativo completo é conduzido pela rede/central e não foi detalhado pela equipe da unidade.
 
 ### Requisitos
 
@@ -230,7 +230,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | grupo_muscular e equipamento em APARELHO | DS_GRUPO_MUSCULAR em EXERCICIO; EQUIPAMENTO é catálogo | O exercício trabalha o músculo |
 | README e DER divergentes (PAGAMENTO, UNIDADE, CHECK_IN, ITEM_TREINO ausentes) | 14 entidades no conceitual, iguais no README, no dicionário e no DER | Consistência |
 | "Aula/Treino" e "Aparelho" | TREINO e EQUIPAMENTO | A RedFit não tem aulas |
-| CONTRATO/MATRÍCULA| O modelo atual registra plano e data de contratação em ALUNO, sem entidade própria de contrato/matrícula | Não foi colocado uma entidade como contrato/matricula pois o gerente não possuía as informações sobre esses casos, pois isso é resolvido diretamente com a rede de academias e não com os funcionarios da unidade |
+| MATRÍCULA/CONTRATO | Para esta entrega, a matrícula/contrato será representada provisoriamente em ALUNO, pelos campos ID_PLANO e DT_CONTRATACAO, sem criar uma tabela independente. | A entrevista confirmou que a troca de plano encerra o vínculo anterior e registra um novo como vigente, mas a unidade não detalhou os dados e as etapas administrativas do contrato. A solução provisória registra o plano vigente e a data de contratação, sem histórico de contratos anteriores; a limitação deverá ser revista quando houver informações suficientes da rede/central. |
 | Justificativa técnica sem alternativas | Seção 1.5 com alternativas e regras citadas | Defender as decisões |
 | Uso de IA sem os 8 itens | Seção 5 com os itens por uso | Documentação obrigatória |
 | HTML com notas de IA não revisadas | Notas removidas; dicionário em HTML único | Entrega profissional |
@@ -435,7 +435,7 @@ A massa está no próprio script. É fictícia (nomes, CPFs, telefones e e-mails
 | Tabela | Registros | Como o volume real justifica |
 |---|---|---|
 | UNIDADE | 3 | A unidade estudada e duas fictícias, para mostrar a rede |
-| GERENTE, RECEPCIONISTA, INSTRUTOR | 3, 4, 8 | A unidade 1 tem a equipe real informada pelo gerente (2 gerentes, 2 recepcionistas e 4 instrutores); as outras têm equipe menor (ajustar o script: hoje a unidade 1 tem 6 instrutores) |
+| GERENTE, RECEPCIONISTA, INSTRUTOR | 3, 4, 8 | A unidade 1 tem a equipe real informada pelo gerente: 2 gerentes, 2 recepcionistas e 4 instrutores; as outras unidades têm equipes menores. |
 | PLANO | 3 | Os três planos reais |
 | ALUNO | 150 | 120 na unidade 1 como amostra para demonstração, 20 e 10 nas unidades fictícias; o gerente não tem o total de alunos ativos, então não há proporção a justificar |
 | CHECK_IN | 669 | Massa sintética de acessos distribuídos em 14 dias; não representa necessariamente o volume real da unidade |
