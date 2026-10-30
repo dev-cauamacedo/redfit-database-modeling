@@ -1,4 +1,4 @@
-# RedFit — Modelagem de Banco de Dados — Relatório Técnico Final (Entrega 2)
+# RedFit — Modelagem de Banco de Dados
 
 
 ## Integrantes
