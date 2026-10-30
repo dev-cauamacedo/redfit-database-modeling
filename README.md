@@ -1,4 +1,4 @@
-# RedFit — Modelagem de Banco de Dados
+# REDFIT — Modelagem de Banco de Dados
 
 
 ## Integrantes
