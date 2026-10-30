@@ -39,7 +39,7 @@
 | Item | Número |
 |---|---|
 | Unidades da rede | 23 |
-| Alunos ativos na unidade estudada | uma média de 2500 alunos |
+| Alunos ativos na unidade estudada | média aproximada de 2.500 alunos ativos (estimativa informada pelo gerente) |
 | Alunos por dia na unidade estudada | em média 500 por dia |
 | Equipe da unidade | 2 gerentes, 2 recepcionistas, 4 instrutores e 2 pessoas na limpeza (informado pelo gerente) |
 | Planos | 3 (RED, Anual e FIT), conforme a página de planos da unidade: RED R$ 9,90 no 1º mês (depois R$ 139,90, confirmado pelo gerente), sem fidelidade e sem matrícula; Anual R$ 89,90/mês com matrícula de R$ 49,90; FIT R$ 119,90/mês com fidelidade e matrícula de R$ 49,90 |
@@ -95,7 +95,7 @@
   - o prontuário registra problemas cardíacos, ósseos e respiratórios, doença hereditária na família e uso de medicação específica;
   - sobre agendamento: o gerente disse que não há aulas para agendar; a unidade não tem mais aulas coletivas e o serviço é exclusivamente de academia (as aulas anunciadas no site existem em outras unidades da rede);
   - instrutores: nome, CPF, endereço, telefone, dados de formação (onde e em que ano se formou), diploma e carteirinha do CREF; recepcionistas: nome, CPF, endereço e telefone;
-  - a rede tem 26 unidades; o plano de acesso à rede toda vale em todas, e o FIT, só na unidade registrada;
+  - a rede tem 23 unidades; o plano de acesso à rede toda vale em todas, e o FIT, só na unidade registrada;
   - check-in por digital ou Face ID, à escolha do aluno; quando o acesso vem de parceiros como o TotalPass, a unidade recebe um alerta no aplicativo da academia para autorizar a entrada;
   - os planos de treino ficam armazenados nas fichas dos alunos, e é necessário registrar quem criou ou alterou cada treino, para o aluno ter acompanhamento mais completo;
   - os equipamentos são cadastrados para a montagem dos treinos: ao escolher o grupo muscular (pernas, costas, ombro, peito), o sistema mostra os equipamentos disponíveis na unidade;
@@ -140,15 +140,15 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 | RF07 | Negar o acesso do aluno do plano RED com mensalidade em atraso, consultando a situação do pagamento; nos demais planos, apenas exibir que há pendências. |
 | RF08 | Cadastrar gerentes, recepcionistas e instrutores (nome, CPF, telefone, e-mail; instrutor também CREF, especialidade e certificação) vinculados a uma unidade. |
 | RF09 | Registrar avaliação física com aluno, instrutor, data, peso, gordura corporal, gordura visceral, água corporal e massa muscular. |
-| RF10 | Cadastrar treino vinculado ao aluno e registrar o profissional que o elaborou/alterou, nome, tipo, descrição, objetivo, data de início e de término, se esses campos forem confirmados no levantamento. O modelo deve permitir atuação de mais de um professor ao longo do tempo. |
-| RF11 | Compor o treino com itens: exercício, séries, repetições, carga/peso, tempo e intervalo/descanso. A entrevista diz que o treino é organizado por grupo muscular e por dia; o grupo deve decidir onde representar esses dados (por exemplo, em TREINO/ITEM_TREINO) e alinhar DER, modelo lógico, dicionário e SQL. |
+| RF10 | Cadastrar treino vinculado ao aluno, com identificação, descrição, objetivo e período de vigência, registrando o instrutor responsável pela elaboração e cada profissional que realizar alterações. O modelo deve permitir que mais de um professor atue no histórico de um treino. |
+| RF11 | Compor o treino com itens que identifiquem o exercício, o dia ou divisão do treino, a ordem de execução, séries, repetições, carga/peso, tempo e intervalo/descanso. O grupo muscular deve estar associado ao exercício. A organização por dia e grupo muscular foi confirmada na entrevista e deve ser refletida de forma consistente no DER, modelo lógico, dicionário e SQL. |
 | RF12 | Registrar a substituição do treino conforme a rotina relatada. A entrevista informa que geralmente o treino antigo é retirado e fica apenas o novo; manter histórico é uma melhoria proposta, não uma prática atual confirmada. O grupo deve decidir e justificar se o banco proposto preservará histórico como requisito futuro. |
 | RF13 | Cadastrar exercícios com nome, descrição, grupo muscular e equipamento (opcional). |
 | RF14 | Cadastrar equipamentos e a quantidade de cada tipo em cada unidade. |
 | RF15 | Cadastrar as unidades com nome e endereço. |
 | RF16 | Consultar acessos por hora, dia da semana e unidade, e acessos negados por motivo (problema P1). |
 | RF17 | Consultar mensalidades em atraso, taxa de inadimplência, formas de pagamento e receita por mês e por plano (problema P2). |
-| RF18 | Apoiar a consulta controlada dos dados cadastrais centralizados entre unidades e, se estiver no escopo, das restrições de saúde necessárias ao atendimento, respeitando a LGPD. Vincular este requisito ao problema correto após a revisão da rastreabilidade. |
+| RF18 | Apoiar a consulta controlada de um cadastro único de alunos entre as 23 unidades, evitando divergências de dados cadastrais (problema P3). Quando fizer parte do escopo, permitir também a consulta restrita das informações de saúde necessárias ao atendimento, respeitando a LGPD. |
 | RF19 | Consultar alunos sem acesso em um período e a carga de treinos e avaliações por instrutor. |
 | RF20 | Executar consultas de auditoria das regras de negócio (RN07, RN11, RN12, RN16, RN18 e RN22). |
 | RF21 | Consultar, numa única consulta, os dados do aluno com o plano contratado, a situação dos pagamentos (inclusive pendências) e o treino vigente com seus itens (problema P4). |
@@ -162,7 +162,7 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 | RNF03 | Integridade | Chaves estrangeiras e restrições CHECK garantem a consistência entre as tabelas. |
 | RNF04 | Disponibilidade | Sistema disponível aos funcionários durante o funcionamento das unidades. |
 | RNF05 | Desempenho | Check-in e consulta do treino devem responder em tempo adequado, apoiados por índices. |
-| RNF06 | Escalabilidade | Suportar as 26 unidades, mais alunos, planos e equipamentos sem mudar a estrutura. |
+| RNF06 | Escalabilidade | Suportar as 23 unidades, mais alunos, planos e equipamentos sem mudar a estrutura. |
 | RNF07 | Usabilidade | Cadastros compreensíveis pela recepção e pelos instrutores; consultas que reúnem plano, pagamento e treino sem voltar ao menu inicial (observação do grupo no software atual). |
 | RNF08 | Manutenibilidade | Um único padrão de nomes e documentação (dicionário versionado). |
 
@@ -182,7 +182,7 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 | RN08 | Todo aluno é cadastrado por um recepcionista. |
 | RN09 | Toda avaliação física pertence a um aluno e é realizada por um instrutor. |
 | RN10 | Todo treino pertence a um aluno e tem um instrutor responsável. |
-| RN11 | O treino é composto por itens; cada item refere-se a um exercício com séries, repetições, carga/peso, tempo e intervalo/descanso. A organização por dia e grupo muscular foi mencionada na entrevista e precisa ser representada ou justificada como fora do escopo. |
+| RN11 | O treino é composto por itens; cada item refere-se a um exercício e registra dia/divisão do treino, ordem de execução, séries, repetições, carga/peso, tempo e intervalo/descanso. O exercício deve estar associado ao grupo muscular correspondente, conforme a organização relatada na entrevista. |
 | RN12 | Na rotina descrita na entrevista, ao atualizar o treino geralmente o antigo é retirado e fica apenas o novo. A preservação do histórico é uma decisão/proposta do modelo, não uma prática atual confirmada. |
 | RN13 | Cada exercício pode usar um equipamento (opcional). |
 | RN14 | Todo instrutor tem registro no CREF. |
@@ -239,7 +239,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 
 | Mudança | Por quê |
 |---|---|
-| Entidade GERENTE; vínculos de gerente, instrutor, recepcionista e aluno com UNIDADE | A rede tem 26 unidades e a unidade tem 2 gerentes; permite consultas por unidade e a regra RN22 |
+| Entidade GERENTE; vínculos de gerente, instrutor, recepcionista e aluno com UNIDADE | A rede tem 23 unidades e a unidade tem 2 gerentes; permite consultas por unidade e a regra RN22 |
 | Endereço do aluno e da unidade em colunas separadas | Evita atributo composto e permite filtrar por bairro e CEP |
 | Doenças hereditárias e medicamentos como listas (tabelas próprias) | São multivalorados; 1FN |
 | PLANO ganha VL_MATRICULA e IN_FIDELIDADE | Representam RN19 e RN20 |
@@ -368,7 +368,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | CHECK de formato (CPF 11 dígitos, CEP 8, telefone 10 ou 11) | várias | RN01 |
 | CHECK percentuais entre 0 e 100; medidas maiores que 0 | AVALIACAO_FISICA | RN09 |
 
-As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem de ação humana (RN17) não cabem em CHECK; são verificadas pelas consultas de auditoria A01 a A06.
+As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHECK e são verificadas pelas consultas de auditoria A01 a A06. A RN17, sobre a presença de responsável para aluno menor de idade, depende de conferência humana na operação e não é verificada por essas consultas nem garantida pelo banco de dados.
 
 **Decisões arquiteturais.** (1) Catálogos (PLANO, EXERCICIO, EQUIPAMENTO) separados dos registros que se repetem. (2) A preservação do histórico de treinos é uma melhoria do modelo, pois a entrevista diz que o treino antigo geralmente é retirado. (3) Situação de atraso derivada, não gravada. (4) Dados de saúde em tabelas próprias, com controle de acesso e atenção à LGPD.
 
@@ -391,7 +391,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem d
 | K9 | Taxa de acessos negados | negados ÷ total de acessos | diário/semanal | abaixo de 5% |
 | K10 | Variação de peso entre avaliações | último peso − primeiro peso, por aluno | trimestral | acompanhar por objetivo |
 
-**Potencial para BI.** O modelo em tabelas de fatos (CHECK_IN, PAGAMENTO, AVALIACAO_FISICA, ITEM_TREINO) e dimensões (ALUNO, PLANO, UNIDADE, INSTRUTOR, EXERCICIO, EQUIPAMENTO, data) alimenta diretamente painéis em ferramentas de BI (acessos por hora e unidade, inadimplência por plano, receita por mês) e comparações entre as 26 unidades.
+**Potencial para BI.** O modelo em tabelas de fatos (CHECK_IN, PAGAMENTO, AVALIACAO_FISICA, ITEM_TREINO) e dimensões (ALUNO, PLANO, UNIDADE, INSTRUTOR, EXERCICIO, EQUIPAMENTO, data) alimenta diretamente painéis em ferramentas de BI (acessos por hora e unidade, inadimplência por plano, receita por mês) e comparações entre as 23 unidades.
 
 **Aplicações analíticas e de IA.** Previsão de demanda por hora (série temporal de CHECK_IN) para dimensionar catracas e equipe; modelo de risco de inadimplência e de evasão a partir de PAGAMENTO e da frequência; recomendação de treino a partir do objetivo, da avaliação física e das restrições de saúde; detecção de anomalias em acessos negados (falhas do reconhecimento facial). Essas aplicações exigem mais histórico do que a massa desta entrega.
 
@@ -401,8 +401,8 @@ As regras que envolvem mais de uma tabela (RN16, RN18, RN22) e as que dependem d
 |---|---|---|
 | P1 — horários de pico e acessos negados | CHECK_IN, UNIDADE | G01, G02, G03, G04 |
 | P2 — mensalidades e inadimplência | PAGAMENTO, ALUNO, PLANO | G05, G06, G07, G08 |
-| P3 — cadastro único e consistência cadastral (e dados de saúde, se incluídos no escopo) | PRONTUARIO_SAUDE, ALUNO, TREINO, INSTRUTOR | G09 |
-| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | G14 |
+| P3 — cadastro único e consistência cadastral entre unidades (dados de saúde apenas se incluídos no escopo) | ALUNO, UNIDADE, PRONTUARIO_SAUDE | G09 (confirmar se a consulta implementada cobre a visão centralizada) |
+| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | RF21; consulta gerencial ainda precisa ser identificada/implementada: o script descrito contém G01–G13 e não há G14 documentada |
 | K1 — acessos por hora | CHECK_IN, UNIDADE | G01, G02 |
 | K2 — média diária de acessos | CHECK_IN, UNIDADE | G04 |
 | K3 — alunos em atraso | PAGAMENTO, ALUNO, PLANO | G05 |
@@ -430,14 +430,14 @@ Teste do script do zero (banco vazio): PREENCHER data e ambiente do teste (ex.: 
 
 # 4. Massa de Dados
 
-A massa está no próprio script. É fictícia (nomes, CPFs, telefones e e-mails inventados; só o nome e o endereço da unidade 1 são da organização). O gerente informou cerca de 500 alunos por dia na unidade e média de 2500 o total de alunos ativos. Por isso a massa é uma amostra em escala reduzida: os cerca de 670 acessos em 14 dias equivalem a uns 48 por dia, o suficiente para mostrar horários de pico, acessos negados e alunos sem acesso.
+A massa está no próprio script. É fictícia (nomes, CPFs, telefones e e-mails inventados; só o nome e o endereço da unidade 1 são da organização). O gerente informou cerca de 500 alunos por dia na unidade e uma média aproximada de 2.500 alunos ativos. Esse número é tratado como estimativa informada na entrevista, não como contagem exata extraída do sistema. Por isso a massa é uma amostra em escala reduzida: os cerca de 670 acessos em 14 dias equivalem a uns 48 por dia, o suficiente para mostrar horários de pico, acessos negados e alunos sem acesso.
 
 | Tabela | Registros | Como o volume real justifica |
 |---|---|---|
 | UNIDADE | 3 | A unidade estudada e duas fictícias, para mostrar a rede |
 | GERENTE, RECEPCIONISTA, INSTRUTOR | 3, 4, 8 | A unidade 1 tem a equipe real informada pelo gerente: 2 gerentes, 2 recepcionistas e 4 instrutores; as outras unidades têm equipes menores. |
 | PLANO | 3 | Os três planos reais |
-| ALUNO | 150 | 120 na unidade 1 como amostra para demonstração, 20 e 10 nas unidades fictícias; o gerente não tem o total de alunos ativos, então não há proporção a justificar |
+| ALUNO | 150 | 120 na unidade 1 como amostra para demonstração, 20 e 10 nas unidades fictícias; a massa é sintética e reduzida, não proporcional ao total estimado de alunos ativos |
 | CHECK_IN | 669 | Massa sintética de acessos distribuídos em 14 dias; não representa necessariamente o volume real da unidade |
 | PAGAMENTO | 429 | 3 meses de mensalidade por aluno (agosto a outubro de 2026) |
 | AVALIACAO_FISICA | 157 | 0, 1 ou 2 avaliações por aluno ao longo de 2026 |
