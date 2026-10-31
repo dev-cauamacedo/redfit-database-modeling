@@ -17,14 +17,14 @@
 
 | Artefato | Arquivo |
 |---|---|
-| Levantamento (entrevista e observação) | [levantamento/](levantamento/levantamento.md) |
-| DER conceitual revisado | [diagramas/](diagramas/DER_conceitual_revisado.png) |
-| Modelo lógico | [diagramas/](diagramas/modelo_logico.png) |
-| Dicionário de dados (HTML) | [dicionario/](dicionario/dicionario_de_dados.html) |
-| Script SQL completo (MySQL) com massa de dados | [docs/](docs/script.sql) |
-| Página de planos da unidade (fonte dos planos e preços) | [evidencias/](evidencias/pagina_planos_neo_quimica_arena.html) |
-| Evidências (fotos JPG/PNG) | [evidencias/](evidencias/) |
-| Slides da apresentação | [apresentação/](docs/script.sql) |
+| Levantamento (entrevista e observação) | [levantamento/levantamento.md](levantamento/levantamento.md) |
+| DER conceitual revisado | [diagramas/diagrama_entidade_relacionamento.png](diagramas/diagrama_entidade_relacionamento.png) |
+| Modelo lógico | [diagramas/modelo_logico.png](diagramas/modelo_logico.png) |
+| Dicionário de dados (HTML) | [dicionario/dicionario_de_dados.html](dicionario/dicionario_de_dados.html) |
+| Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
+| Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](fonte_planos.png) |
+| Evidências (fotos JPG/PNG) | [evidencias/entrevista.png](evidencias/entrevista.png) |
+| Slides da apresentação | [docs/script.sql](docs/script.sql) |
 
 ---
 
@@ -64,15 +64,17 @@
 - Endereço da unidade: Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000.
 - Perfil da unidade no Google Maps: [RedFit Academia — Neo Química Arena](https://www.google.com/maps/place/REDFIT+Academia+-+Neo+Qu%C3%ADmica+Arena+-+SP/@-23.545562,-46.4776382,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce677885731389:0xea7cfb187022485e!8m2!3d-23.5455669!4d-46.4750633!16s%2Fg%2F11hkwwgmhl).
 - Responsável: Guilherme Nogueira, gerente da unidade. Contato: WhatsApp da unidade (11) 93622-0732 e sac@redfit.com.br, conforme a página da unidade (o telefone direto do gerente não pode ser informado).
-- Página de planos da unidade (endereço, horário, contato, planos e preços): [`evidencias/pagina_planos_neo_quimica_arena.html`](evidencias/pagina_planos_neo_quimica_arena.html).
-- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/foto_entrevista_gerente.jpg`](evidencias/foto_entrevista_gerente.jpg).
+- Página de planos da unidade (endereço, horário, contato, planos e preços): [`evidencias/fonte_planos.png`](evidencias/fonte_planos.png).
+- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/entrevista.jpg`](evidencias/entrevista.jpg).
 - Imagens de divulgação da unidade (não foram tiradas pelo grupo; servem para ilustrar o local, e a comprovação de acesso é a foto da entrevista). O cartaz "RedPass" que aparece na fachada era uma promoção da inauguração e não existe mais.
 
-![Foto no local com o gerente](evidencias/foto_entrevista_gerente.jpg)
+![Foto no local com o gerente](<img width="1200" height="1600" alt="WhatsApp Image 2026-09-12 at 15 04 19" src="https://github.com/user-attachments/assets/8a51e159-e3a8-412c-b09b-612d60e0814b" />)(evidencias/foto_entrevista_gerente.jpg)
 
-![Fachada da RedFit Neo Química Arena (imagem de divulgação)](evidencias/fachada_neo_quimica_arena.jpg)
 
-![Salão de musculação da unidade (imagem de divulgação)](evidencias/salao_musculacao_neo_quimica_arena.jpg)
+![Fachada da RedFit Neo Química Arena (<img width="1360" height="767" alt="36807ceb-e558-41d1-9167-752f4a4fa835_relation_size" src="https://github.com/user-attachments/assets/73730542-591f-47fc-8dd9-b65b5b717217" />
+)](evidencias/academia.jpg)
+
+![Salão de musculação da unidade (<img width="1600" height="900" alt="salao_academia" src="https://github.com/user-attachments/assets/66109f0f-dd1f-41a3-9c25-78327c45d61b" />)](evidencias/salao_academia.jpg)
 
 ### Relato das entrevistas
 
@@ -80,7 +82,7 @@
 
 - **Quem:** 1° entrevista, com Guilherme Nogueira (gerente da unidade) e o integrante Marco Aurélio da Silva Lira; 2° entrevista, com o mesmo gerente e os integrantes Marco Aurélio da Silva Lira e Suellen de Araujo Santos Pimenta.
 - **Quando e onde:** entrevista 1 em 31/08/2026 e entrevista 2 em 30/10/2026, ambas na própria unidade (Av. Miguel Ignácio Curi, 111, 10º andar, Itaquera, São Paulo – SP, CEP 08220-000).
-- **Comprovação:** foto tirada em 31/08/2026, na entrevista 1, em `evidencias/foto_entrevista1_gerente.jpg` e foto tirada em 30/10/2026, na entrevista 2, em `evidencias/foto_entrevista2_gerente.jpg` (ver evidências).
+- **Comprovação:** foto tirada em 31/08/2026, na entrevista 1, em `evidencias/entrevista.png`.
 - **Achados da entrevista 1 (respostas do gerente):**
   - cadastro com nome, CPF (identificador único), data de nascimento, e-mail e telefone; quem usa o aplicativo gera um código de check-in; o aluno também preenche o prontuário;
   - o plano antigo é cancelado quando o aluno troca de plano e o novo é registrado como vigente, "praticamente um novo contrato"; o aluno pode ainda cancelar ou migrar para aplicativos parceiros;
@@ -118,12 +120,17 @@
 | Exercícios e equipamentos | O catálogo guarda cada exercício com grupo muscular e equipamento (quando houver); cada unidade registra quantos aparelhos de cada tipo possui. |
 | Profissionais e unidades | A unidade tem 2 gerentes, 2 recepcionistas, 4 instrutores (professores) e 2 pessoas na limpeza. Instrutores: nome, CPF, endereço, telefone, formação (onde e em que ano), diploma e CREF; recepção e demais funcionários: nome, CPF, endereço e telefone. O modelo contempla gerentes, recepcionistas e instrutores; a equipe de limpeza fica fora do escopo porque não lida com dados que o sistema controla. A academia usa o sistema próprio e o sistema parceiro Eva. |
 
-Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fluxo_1 a fluxo_5, entregues na Entrega 1).
+Fluxogramas dos processos e da integração entre eles: [diagramas/fluxo1_cadastro_matricula.png](diagramas/fluxo1_cadastro_matricula.png)
+                                                      [diagramas/fluxo2_check_in.png](diagramas/fluxo2_check_in.png).
+                                                      [diagramas/fluxo3_avaliacao_fisica.png](diagramas/fluxo3_avaliacao_fisica.png).
+                                                      [diagramas/fluxo4_treino.png](diagramas/fluxo4_treino.png).
+                                                      [diagramas/fluxo5_integracao.png](diagramas/fluxo5_integracao.png).
 
 **Processos prováveis não incluídos e por quê.**
 - *Aulas coletivas e agendamento:* o gerente informou que a unidade não tem mais aulas coletivas; só há treinos. A página de planos cita as aulas porque outras unidades da rede as oferecem. Por isso o processo não faz parte do escopo.
 - *Compra e manutenção de equipamentos:* não foram levantados nesta unidade; a quantidade de aparelhos é registrada, mas o processo de compra e manutenção será confirmado com o gerente e não faz parte do escopo desta entrega.
-- *Cancelamento de plano:* as regras comerciais são tratadas em RN20 (RED com aviso de 30 dias; FIT com fidelidade de 12 meses e multa de 20% sobre os meses restantes; Anual com multa igual às mensalidades restantes). Para esta entrega, o registro da contratação e da vinculação do plano será representado provisoriamente em ALUNO, pelos campos ID_PLANO e DT_CONTRATACAO, sob a denominação conceitual de **MATRÍCULA/CONTRATO**. Essa solução permite identificar o plano vigente e a data da contratação, mas não mantém o histórico de contratos anteriores, solicitações de cancelamento ou trocas de plano. A limitação fica registrada porque o fluxo administrativo completo é conduzido pela rede/central e não foi detalhado pela equipe da unidade.
+- *Cancelamento de plano:* as regras comerciais estão em RN20. Por orientação do professor, o modelo não tem entidade CONTRATO: o plano vigente e a data de contratação ficam em ALUNO (ID_PLANO e DT_CONTRATACAO), sob a denominação conceitual de matrícula/contrato. Essa solução não guarda o histórico de planos anteriores, trocas e solicitações de cancelamento, que o fluxo administrativo conduzido pela rede/central não detalhou à unidade.
+- *MATRÍCULA/CONTRATO*. Essa solução permite identificar o plano vigente e a data da contratação, mas não mantém o histórico de contratos anteriores, solicitações de cancelamento ou trocas de plano. A limitação fica registrada porque o fluxo administrativo completo é conduzido pela rede/central e não foi detalhado pela equipe da unidade.
 
 ### Requisitos
 
@@ -175,7 +182,7 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 | RN01 | Todo aluno tem nome completo, CPF único, data de nascimento, endereço e telefone. |
 | RN02 | A data de nascimento identifica se o aluno é menor ou maior de idade. |
 | RN03 | O endereço é solicitado para verificar proximidade e para emergências. |
-| RN04 | Cada aluno tem, em regra, um plano de treino ativo por vez; a bioimpedância pode ser contratada separadamente, permitindo um plano de treino e outro serviço de bioimpedância. A entrevista também menciona mudança para aplicativos parceiros. |
+| RN04 | Cada aluno tem, em regra, um plano de treino ativo por vez; a bioimpedância é solicitada separadamente, permitindo um plano de treino e uma solicitação para realizar a biopedancia. A entrevista também menciona mudança para aplicativos parceiros. |
 | RN05 | Todo pagamento deve ser associado ao aluno e ao que está sendo pago; normalmente corresponde à matrícula/plano, mas pode abranger plano de treino e bioimpedância quando contratados juntos. |
 | RN06 | Todo acesso é registrado com aluno, unidade, data e hora, forma de acesso e resultado; acesso negado exige motivo. |
 | RN07 | As informações de saúde do aluno ficam no prontuário, um por aluno. |
@@ -203,9 +210,9 @@ Fluxogramas dos processos e da integração entre eles: [imagens/](imagens/) (fl
 
 ### Notação e software do DER
 
-O DER segue a notação do brModelo: entidades em retângulos, relacionamentos em losangos, cardinalidade (mín,máx) dos dois lados, identificadores e atributos de relacionamento ligados ao losango, sem chaves estrangeiras. O diagrama final deve ser produzido/validado no brModelo, conforme a notação exigida pelo esqueleto. Arquivo-fonte do brModelo (.brM3 ou formato usado pela versão instalada): **PREENCHER pelo grupo**. Não declarar Graphviz como software final exigido; se foi usado apenas como rascunho, identificar isso explicitamente.
+O DER segue a notação do brModelo: entidades em retângulos, relacionamentos em losangos, cardinalidade (mín,máx) dos dois lados, identificadores e atributos de relacionamento ligados ao losango, sem chaves estrangeiras. O diagrama final deve ser produzido/validado no brModelo, conforme a notação exigida pelo esqueleto.
 
-![DER conceitual revisado](diagramas/DER_conceitual_revisado.png)
+![DER conceitual revisado](diagramas/diagrama_entidade_relacionamento.png)
 
 **Decisão de modelagem: entidades separadas.** O grupo manteve GERENTE, INSTRUTOR e RECEPCIONISTA como entidades independentes, sem generalização FUNCIONARIO: cada cargo tem atributos e responsabilidades próprias (CREF e especialidade do instrutor; cadastro de alunos pela recepção; administração da unidade pelo gerente). Alternativa considerada: generalização, útil se os atributos comuns crescerem; para o escopo atual duplica poucas colunas e simplifica as consultas.
 
@@ -230,7 +237,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | grupo_muscular e equipamento em APARELHO | DS_GRUPO_MUSCULAR em EXERCICIO; EQUIPAMENTO é catálogo | O exercício trabalha o músculo |
 | README e DER divergentes (PAGAMENTO, UNIDADE, CHECK_IN, ITEM_TREINO ausentes) | 14 entidades no conceitual, iguais no README, no dicionário e no DER | Consistência |
 | "Aula/Treino" e "Aparelho" | TREINO e EQUIPAMENTO | A RedFit não tem aulas |
-| MATRÍCULA/CONTRATO | Para esta entrega, a matrícula/contrato será representada provisoriamente em ALUNO, pelos campos ID_PLANO e DT_CONTRATACAO, sem criar uma tabela independente. | A entrevista confirmou que a troca de plano encerra o vínculo anterior e registra um novo como vigente, mas a unidade não detalhou os dados e as etapas administrativas do contrato. A solução provisória registra o plano vigente e a data de contratação, sem histórico de contratos anteriores; a limitação deverá ser revista quando houver informações suficientes da rede/central. |
+| MATRÍCULA/CONTRATO | Mantida sem entidade própria: ID_PLANO e DT_CONTRATACAO em ALUNO. | Por orientação do professor, não é necessário criar a entidade. Limitação conhecida: o modelo guarda só o plano vigente, sem histórico de trocas ou cancelamentos. |
 | Justificativa técnica sem alternativas | Seção 1.5 com alternativas e regras citadas | Defender as decisões |
 | Uso de IA sem os 8 itens | Seção 5 com os itens por uso | Documentação obrigatória |
 | HTML com notas de IA não revisadas | Notas removidas; dicionário em HTML único | Entrega profissional |
@@ -302,7 +309,8 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 
 **Generalização.** Não há generalização no modelo (decisão do grupo, ver seção 1.1); portanto não houve estratégia de conversão a escolher.
 
-![Modelo lógico](diagramas/modelo_logico.png)
+![Modelo lógico](<img width="1280" height="1100" alt="WhatsApp Image 2026-10-30 at 16 48 21" src="https://github.com/user-attachments/assets/1596aca0-081b-4b67-98d9-c638542319d6" />)
+
 
 ## 1.3 Chaves primárias e estrangeiras
 
@@ -378,7 +386,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHEC
 
 **KPIs.**
 
-| Código | Indicador | Fórmula | Período | Meta (a validar com a gerência) |
+| Código | Indicador | Fórmula | Período | Meta|
 |---|---|---|---|---|
 | K1 | Acessos por hora | contagem de CHECK_IN por unidade e hora | semanal | nenhum horário acima da capacidade das catracas |
 | K2 | Média diária de acessos | acessos ÷ dias da janela, por unidade | semanal | acompanhar tendência |
