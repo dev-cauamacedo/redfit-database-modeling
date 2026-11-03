@@ -47,14 +47,14 @@
 | Horário de funcionamento | Segunda a sexta, 6h às 23h; sábado, domingo e feriados, 10h às 16h |
 | Benefícios corporativos aceitos | Wellhub (Gympass), TotalPass e Gurupass |
 
-**Problemas e necessidades (gestão de informações).** O gerente relata divergência de nome e de dados básicos (que atrapalha a cobrança e o registro do aluno), cadastro separado por unidade (ele quer um cadastro único), controle de frequência (dia e horário de cada entrada, usado para saber se o aluno treina, inclusive em outras unidades) dependência da internet no sistema e na catraca e, pela observação do grupo, consultas feitas um item por vez no software atual. Cada problema está ligado às tabelas e consultas da rastreabilidade.
+**Problemas e necessidades (gestão de informações).** O gerente relata divergência de nome e de dados básicos (que atrapalha a cobrança e o registro do aluno), cadastro separado por unidade (ele quer um cadastro único), controle de frequência (dia e horário de cada entrada, usado para saber se o aluno treina, inclusive em outras unidades) e dependência da internet no sistema e na catraca. Pela observação do grupo, as consultas no software atual são feitas um item por vez. Cada problema está ligado às tabelas e às consultas da rastreabilidade (seção 1.6).
 
 | Código | Problema | Como o modelo resolve |
 |---|---|---|
-| P1 | Controle de frequência e de horários de uso: a academia registra dia e horário das entradas para verificar se o aluno realmente treina (inclusive em outras unidades) e quando a demanda se concentra; a catraca depende da internet, e o grupo observou dificuldade e travamentos ao registrar o Face ID. O banco não corrige a catraca nem o cadastro biométrico, mas registra os acessos, com o motivo de cada acesso negado (inclusive falha de reconhecimento), para analisar horários e resultados. |
-| P2 | Controle de mensalidades e inadimplência: a cobrança é automática todo mês; quando falha, fica registrada como atraso e o aluno regulariza na recepção. No plano RED o atraso bloqueia a catraca; nos planos Anual e FIT apenas aparece a pendência. |
-| P3 | Divergências nos dados cadastrais e ausência de um cadastro centralizado entre unidades dificultam a gestão e podem gerar inconsistências. A ficha médica em papel também exige cuidado no tratamento dos dados de saúde. |
-| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. O banco reúne plano, pagamentos e treino vigente do aluno numa única consulta. |
+| P1 | Controle de frequência e de horários de uso: a academia registra dia e horário das entradas para verificar se o aluno realmente treina (inclusive em outras unidades) e quando a demanda se concentra. A catraca depende da internet, e o grupo observou dificuldade e travamentos ao registrar o Face ID. | Cada acesso vira uma linha em CHECK_IN, com aluno, unidade, data e hora, forma de acesso, resultado (liberado ou negado) e, se negado, o motivo (inadimplência ou falha de reconhecimento). Como CHECK_IN guarda a unidade do acesso e ALUNO guarda a unidade de matrícula, dá para ver quem treina em outras unidades. As consultas G01 a G04 mostram acessos por hora, dia da semana e unidade, acessos negados por motivo e média diária. O banco não corrige a catraca, a internet nem o cadastro biométrico; ele registra e permite analisar os acessos. |
+| P2 | Controle de mensalidades e inadimplência: a cobrança é automática todo mês; quando falha, fica registrada como atraso e o aluno regulariza na recepção. No plano RED o atraso bloqueia a catraca; nos planos Anual e FIT apenas aparece a pendência. | Cada cobrança é uma linha em PAGAMENTO, com aluno, vencimento, valor, forma, situação e data de pagamento. O atraso não é gravado, é derivado (situação pendente com vencimento passado), então não fica desatualizado. O vínculo ALUNO → PLANO permite aplicar a regra de cada plano (RN16: só o RED bloqueia). As consultas G05 a G08 listam alunos em atraso, taxa de inadimplência, formas de pagamento e receita por mês e plano, e a auditoria A04 confere se algum RED em atraso teve acesso liberado. |
+| P3 | Divergências nos dados cadastrais e ausência de um cadastro centralizado entre unidades dificultam a gestão e podem gerar inconsistências. A ficha médica em papel também exige cuidado no tratamento dos dados de saúde. | Há um único cadastro de ALUNO para toda a rede, ligado à unidade de matrícula por ID_UNIDADE, em vez de um cadastro por unidade. O CPF é UNIQUE e obrigatório (RN01), o que impede o mesmo aluno duplicado, e CPF, CEP e telefone têm CHECK de formato. O endereço é dividido em colunas atômicas. A ficha médica passa a ser PRONTUARIO_SAUDE (1:1 com o aluno), com doenças e medicamentos em tabelas próprias, o que permite restringir o acesso por perfil (RNF01 e RNF02, LGPD). A consulta G09 apoia a conferência do cadastro e a A01 aponta alunos sem prontuário. O banco reduz as divergências, mas não as elimina: a correção do dado continua dependendo de quem digita. |
+| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. | Como plano, pagamentos e treino estão ligados ao mesmo aluno por chaves estrangeiras, uma única consulta com JOIN (G14, RF21) devolve os dados do aluno, o plano
 
 **Escopo do sistema.** O banco reúne os dados selecionados da unidade: alunos, planos/contratos, pagamentos, acessos, saúde, avaliações físicas, treinos, exercícios, equipamentos, unidades e profissionais. A entrevista cita sistema próprio, sistema parceiro Eva e dependência de internet; a integração técnica entre esses sistemas e a catraca não foi especificada. Os problemas acima não restringem o modelo a um setor.
 
@@ -68,13 +68,11 @@
 - Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/entrevista.jpg`](evidencias/entrevista.jpg).
 - Imagens de divulgação da unidade (não foram tiradas pelo grupo; servem para ilustrar o local, e a comprovação de acesso é a foto da entrevista). O cartaz "RedPass" que aparece na fachada era uma promoção da inauguração e não existe mais.
 
-![Foto no local com o gerente](<img width="1200" height="1600" alt="WhatsApp Image 2026-09-12 at 15 04 19" src="https://github.com/user-attachments/assets/8a51e159-e3a8-412c-b09b-612d60e0814b" />)(evidencias/foto_entrevista_gerente.jpg)
+<img width="1200" height="1600" alt="WhatsApp Image 2026-09-12 at 15 04 19" src="https://github.com/user-attachments/assets/8a51e159-e3a8-412c-b09b-612d60e0814b" />
 
+<img width="1360" height="767" alt="36807ceb-e558-41d1-9167-752f4a4fa835_relation_size" src="https://github.com/user-attachments/assets/73730542-591f-47fc-8dd9-b65b5b717217" />
 
-![Fachada da RedFit Neo Química Arena (<img width="1360" height="767" alt="36807ceb-e558-41d1-9167-752f4a4fa835_relation_size" src="https://github.com/user-attachments/assets/73730542-591f-47fc-8dd9-b65b5b717217" />
-)](evidencias/academia.jpg)
-
-![Salão de musculação da unidade (<img width="1600" height="900" alt="salao_academia" src="https://github.com/user-attachments/assets/66109f0f-dd1f-41a3-9c25-78327c45d61b" />)](evidencias/salao_academia.jpg)
+<img width="1600" height="900" alt="salao_academia" src="https://github.com/user-attachments/assets/66109f0f-dd1f-41a3-9c25-78327c45d61b" />
 
 ### Relato das entrevistas
 
@@ -120,11 +118,19 @@
 | Exercícios e equipamentos | O catálogo guarda cada exercício com grupo muscular e equipamento (quando houver); cada unidade registra quantos aparelhos de cada tipo possui. |
 | Profissionais e unidades | A unidade tem 2 gerentes, 2 recepcionistas, 4 instrutores (professores) e 2 pessoas na limpeza. Instrutores: nome, CPF, endereço, telefone, formação (onde e em que ano), diploma e CREF; recepção e demais funcionários: nome, CPF, endereço e telefone. O modelo contempla gerentes, recepcionistas e instrutores; a equipe de limpeza fica fora do escopo porque não lida com dados que o sistema controla. A academia usa o sistema próprio e o sistema parceiro Eva. |
 
-Fluxogramas dos processos e da integração entre eles: [diagramas/fluxo1_cadastro_matricula.png](diagramas/fluxo1_cadastro_matricula.png)
-                                                      [diagramas/fluxo2_check_in.png](diagramas/fluxo2_check_in.png).
-                                                      [diagramas/fluxo3_avaliacao_fisica.png](diagramas/fluxo3_avaliacao_fisica.png).
-                                                      [diagramas/fluxo4_treino.png](diagramas/fluxo4_treino.png).
-                                                      [diagramas/fluxo5_integracao.png](diagramas/fluxo5_integracao.png).
+Fluxogramas dos processos e da integração entre eles: 
+
+
+<img width="806" height="1361" alt="fluxo_1_cadastro_matricula" src="https://github.com/user-attachments/assets/f2b1a5a7-c9eb-423f-9ff5-63647111be95" />
+
+<img width="891" height="1204" alt="fluxo_2_check_in" src="https://github.com/user-attachments/assets/d218cb53-bb3a-4d69-b503-13922830aa69" />
+
+<img width="742" height="734" alt="fluxo_3_avaliacao_fisica" src="https://github.com/user-attachments/assets/ac2c3322-208c-4896-b2d5-5a454425a012" />
+
+<img width="1150" height="1187" alt="fluxo_4_treino" src="https://github.com/user-attachments/assets/a5cf744f-1d19-434b-a042-10295e2e2688" />
+
+<img width="1081" height="746" alt="fluxo_5_integracao" src="https://github.com/user-attachments/assets/142065b0-3e5d-464a-95e8-65d2419e47a9" />
+
 
 **Processos prováveis não incluídos e por quê.**
 - *Aulas coletivas e agendamento:* o gerente informou que a unidade não tem mais aulas coletivas; só há treinos. A página de planos cita as aulas porque outras unidades da rede as oferecem. Por isso o processo não faz parte do escopo.
@@ -309,8 +315,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 
 **Generalização.** Não há generalização no modelo (decisão do grupo, ver seção 1.1); portanto não houve estratégia de conversão a escolher.
 
-![Modelo lógico](<img width="1280" height="1100" alt="WhatsApp Image 2026-10-30 at 16 48 21" src="https://github.com/user-attachments/assets/1596aca0-081b-4b67-98d9-c638542319d6" />)
-
+<img width="1280" height="1100" alt="WhatsApp Image 2026-10-30 at 16 48 21" src="https://github.com/user-attachments/assets/1596aca0-081b-4b67-98d9-c638542319d6" />
 
 ## 1.3 Chaves primárias e estrangeiras
 
@@ -426,9 +431,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHEC
 
 # 2. Modelo Lógico Relacional
 
-Diagrama em ['diagramas/modelo_logico.png'](diagramas/modelo_logico.png): 17 tabelas conforme a versão atual do modelo. O modelo lógico final deve ser validado/produzido no software exigido pelo professor (brModelo). **Arquivo-fonte e versão do software: PREENCHER pelo grupo.** Conferir se o PNG corresponde ao arquivo-fonte final. As demais restrições (NOT NULL, UNIQUE, CHECK e DEFAULT) estão no [dicionário de dados](dicionario/dicionario_de_dados.html) e implementadas no script.
-
-![Modelo lógico](diagramas/modelo_logico.png)
+<img width="1280" height="1100" alt="modelo_logico" src="https://github.com/user-attachments/assets/f4777802-06c3-4c14-b5af-74533a205137" />
 
 # 3. Script SQL Completo
 
