@@ -38,7 +38,7 @@
 
 | Item | Número |
 |---|---|
-| Unidades da rede | 23 |
+| Unidades de rede | 23 |
 | Alunos ativos na unidade estudada | média aproximada de 2.500 alunos ativos (estimativa informada pelo gerente) |
 | Alunos por dia na unidade estudada | em média 500 por dia |
 | Equipe da unidade | 2 gerentes, 2 recepcionistas, 4 instrutores e 2 pessoas na limpeza (informado pelo gerente) |
