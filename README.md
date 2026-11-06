@@ -24,7 +24,7 @@
 | Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
 | Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](evidencias/fonte_planos.png) |
 | Evidências (fotos) | [evidencias/entrevista.png](evidencias/entrevista.png) · [evidencias/academia.png](evidencias/academia.png) |
-
+| Slides da apresentação | [apresentacao/redfit_apresentacao.pptx](apresentacao/redfit_apresentacao.pptx) |
 
 ---
 
@@ -38,7 +38,7 @@
 
 | Item | Número |
 |---|---|
-| Unidades de rede | 23 |
+| Unidades da rede | 23 |
 | Alunos ativos na unidade estudada | média aproximada de 2.500 alunos ativos (estimativa informada pelo gerente) |
 | Alunos por dia na unidade estudada | em média 500 por dia |
 | Equipe da unidade | 2 gerentes, 2 recepcionistas, 4 instrutores e 2 pessoas na limpeza (informado pelo gerente) |
@@ -110,13 +110,13 @@
 
 | Processo | O que acontece e quais dados envolve |
 |---|---|
-| Cadastro e matrícula | O aluno informa nome completo, CPF (identificador único), data de nascimento, endereço e telefone, que são obrigatórios; e-mail é coletado para avisos. O cadastro pode ser feito pelo celular na contratação online e a unidade também recebe o código de check-in de quem usa o aplicativo. O aluno preenche o prontuário de saúde (problemas cardíacos, ósseos e respiratórios, doença hereditária e medicação). Cada unidade mantém um cadastro próprio, e a divergência de nomes e dados básicos atrapalha cobrança e registro; o gerente quer um cadastro único. |
-| Contratação do plano e cobrança | O aluno escolhe entre RED, Anual e FIT (preços, matrícula e fidelidade na seção 3 do levantamento) e paga com cartão de crédito, com renovação automática. A troca de plano cancela o anterior e registra o novo como vigente: em plano com fidelidade pode haver multa; nos demais, cobra-se a diferença. Se o aluno cancela o Anual antes do fim, a multa é a soma das mensalidades que faltam. A bioimpedância pode ser contratada à parte. A cobrança é disparada automaticamente todo mês; se falha, fica registrada como atraso e o aluno regulariza na recepção. Na recepção só se aceitam Pix e cartão de débito (não há boleto); o crédito é a cobrança mensal do plano. Valor, data e forma de cada pagamento são registrados. |
-| Controle de acesso | O check-in é feito por digital ou Face ID, à escolha do aluno. Quando o acesso vem de parceiros (Wellhub, TotalPass, Gurupass), a unidade recebe um alerta no aplicativo da academia para autorizar a entrada. São registrados dia e horário da frequência, usada para controle e para entender pedidos de cancelamento. A catraca depende da internet. No plano RED, mensalidade em atraso bloqueia a catraca; nos planos Anual e FIT não há bloqueio, e o sistema só mostra a pendência. |
-| Avaliação física | A bioimpedância é realizada por equipamento em parceria com a MyNutri, que mede peso, gordura visceral, água corporal, massa muscular e outros dados; o aplicativo mantém histórico para comparação. O grupo deve confirmar quais campos são efetivamente acessíveis e armazenados no sistema da academia. |
-| Montagem e acompanhamento de treinos | Os professores elaboram o treino com base nas necessidades e objetivos do aluno; a organização prioriza grupos musculares e dias. Cada item pode registrar exercício, máquina, séries, repetições, peso/carga e descanso; o prazo costuma ser de um a dois meses. Em geral, o treino antigo é retirado e fica apenas o novo. A entrevista diz que fica registrado quem elaborou o treino e, após alterações, quem realizou a alteração. Mais de um professor pode atuar ao longo do tempo. |
-| Exercícios e equipamentos | O catálogo guarda cada exercício com grupo muscular e equipamento (quando houver); cada unidade registra quantos aparelhos de cada tipo possui. |
-| Profissionais e unidades | A unidade tem 2 gerentes, 2 recepcionistas, 4 instrutores (professores) e 2 pessoas na limpeza. Instrutores: nome, CPF, endereço, telefone, formação (onde e em que ano), diploma e CREF; recepção e demais funcionários: nome, CPF, endereço e telefone. O modelo contempla gerentes, recepcionistas e instrutores; a equipe de limpeza fica fora do escopo porque não lida com dados que o sistema controla. A academia usa o sistema próprio e o sistema parceiro Eva. |
+| **PR01** — Cadastro e matrícula | O aluno informa nome completo, CPF (identificador único), data de nascimento, endereço e telefone, que são obrigatórios; e-mail é coletado para avisos. O cadastro pode ser feito pelo celular na contratação online e a unidade também recebe o código de check-in de quem usa o aplicativo. O aluno preenche o prontuário de saúde (problemas cardíacos, ósseos e respiratórios, doença hereditária e medicação). Cada unidade mantém um cadastro próprio, e a divergência de nomes e dados básicos atrapalha cobrança e registro; o gerente quer um cadastro único. |
+| **PR02** — Contratação do plano e cobrança | O aluno escolhe entre RED, Anual e FIT (preços, matrícula e fidelidade na seção 3 do levantamento) e paga com cartão de crédito, com renovação automática. A troca de plano cancela o anterior e registra o novo como vigente: em plano com fidelidade pode haver multa; nos demais, cobra-se a diferença. Se o aluno cancela o Anual antes do fim, a multa é a soma das mensalidades que faltam. A bioimpedância pode ser contratada à parte. A cobrança é disparada automaticamente todo mês; se falha, fica registrada como atraso e o aluno regulariza na recepção. Na recepção só se aceitam Pix e cartão de débito (não há boleto); o crédito é a cobrança mensal do plano. Valor, data e forma de cada pagamento são registrados. |
+| **PR03** — Controle de acesso | O check-in é feito por digital ou Face ID, à escolha do aluno. Quando o acesso vem de parceiros (Wellhub, TotalPass, Gurupass), a unidade recebe um alerta no aplicativo da academia para autorizar a entrada. São registrados dia e horário da frequência, usada para controle e para entender pedidos de cancelamento. A catraca depende da internet. No plano RED, mensalidade em atraso bloqueia a catraca; nos planos Anual e FIT não há bloqueio, e o sistema só mostra a pendência. |
+| **PR04** — Avaliação física | A bioimpedância é realizada por equipamento em parceria com a MyNutri, que mede peso, gordura visceral, água corporal, massa muscular e outros dados; o aplicativo mantém histórico para comparação. O grupo deve confirmar quais campos são efetivamente acessíveis e armazenados no sistema da academia. |
+| **PR05** — Montagem e acompanhamento de treinos | Os professores elaboram o treino com base nas necessidades e objetivos do aluno; a organização prioriza grupos musculares e dias. Cada item pode registrar exercício, máquina, séries, repetições, peso/carga e descanso; o prazo costuma ser de um a dois meses. Em geral, o treino antigo é retirado e fica apenas o novo. A entrevista diz que fica registrado quem elaborou o treino e, após alterações, quem realizou a alteração. Mais de um professor pode atuar ao longo do tempo. |
+| **PR06** — Exercícios e equipamentos | O catálogo guarda cada exercício com grupo muscular e equipamento (quando houver); cada unidade registra quantos aparelhos de cada tipo possui. |
+| **PR07** — Profissionais e unidades | A unidade tem 2 gerentes, 2 recepcionistas, 4 instrutores (professores) e 2 pessoas na limpeza. Instrutores: nome, CPF, endereço, telefone, formação (onde e em que ano), diploma e CREF; recepção e demais funcionários: nome, CPF, endereço e telefone. O modelo contempla gerentes, recepcionistas e instrutores; a equipe de limpeza fica fora do escopo porque não lida com dados que o sistema controla. A academia usa o sistema próprio e o sistema parceiro Eva. |
 
 Fluxogramas dos processos e da integração entre eles: 
 
@@ -450,7 +450,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHEC
 
 # 2. Modelo Lógico Relacional
 
-<img width="1280" height="1100" alt="modelo_logico" src="https://github.com/user-attachments/assets/f4777802-06c3-4c14-b5af-74533a205137" />
+![Modelo lógico RedFit — 17 tabelas, MySQL 8.0.16+](diagramas/modelo_logico.png)
 
 # 3. Script SQL Completo
 
