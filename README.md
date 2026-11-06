@@ -18,13 +18,13 @@
 | Artefato | Arquivo |
 |---|---|
 | Levantamento (entrevista e observação) | [levantamento/levantamento.md](levantamento/levantamento.md) |
-| DER conceitual revisado | [diagramas/diagrama_entidade_relacionamento.png](diagramas/diagrama_entidade_relacionamento.png) |
+| DER conceitual revisado | [diagramas/diagrama_entidade_relacionamento.JPG](diagramas/diagrama_entidade_relacionamento.JPG) |
 | Modelo lógico | [diagramas/modelo_logico.png](diagramas/modelo_logico.png) |
 | Dicionário de dados (HTML) | [dicionario/dicionario_de_dados.html](dicionario/dicionario_de_dados.html) |
 | Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
-| Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](fonte_planos.png) |
-| Evidências (fotos JPG/PNG) | [evidencias/entrevista.png](evidencias/entrevista.png) |
-| Slides da apresentação | [apresentacao/](apresentacao/) (a incluir pelo grupo) |
+| Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](evidencias/fonte_planos.png) |
+| Evidências (fotos) | [evidencias/entrevista.png](evidencias/entrevista.png) · [evidencias/academia.png](evidencias/academia.png) |
+| Slides da apresentação | [apresentacao/redfit_apresentacao.pptx](apresentacao/redfit_apresentacao.pptx) |
 
 ---
 
@@ -54,7 +54,7 @@
 | P1 | Controle de frequência e de horários de uso: a academia registra dia e horário das entradas para verificar se o aluno realmente treina (inclusive em outras unidades) e quando a demanda se concentra. A catraca depende da internet, e o grupo observou dificuldade e travamentos ao registrar o Face ID. | Cada acesso vira uma linha em CHECK_IN, com aluno, unidade, data e hora, forma de acesso, resultado (liberado ou negado) e, se negado, o motivo (inadimplência ou falha de reconhecimento). Como CHECK_IN guarda a unidade do acesso e ALUNO guarda a unidade de matrícula, dá para ver quem treina em outras unidades. As consultas G01 a G04 mostram acessos por hora, dia da semana e unidade, acessos negados por motivo e média diária. O banco não corrige a catraca, a internet nem o cadastro biométrico; ele registra e permite analisar os acessos. |
 | P2 | Controle de mensalidades e inadimplência: a cobrança é automática todo mês; quando falha, fica registrada como atraso e o aluno regulariza na recepção. No plano RED o atraso bloqueia a catraca; nos planos Anual e FIT apenas aparece a pendência. | Cada cobrança é uma linha em PAGAMENTO, com aluno, vencimento, valor, forma, situação e data de pagamento. O atraso não é gravado, é derivado (situação pendente com vencimento passado), então não fica desatualizado. O vínculo ALUNO → PLANO permite aplicar a regra de cada plano (RN16: só o RED bloqueia). As consultas G05 a G08 listam alunos em atraso, taxa de inadimplência, formas de pagamento e receita por mês e plano, e a auditoria A04 confere se algum RED em atraso teve acesso liberado. |
 | P3 | Divergências nos dados cadastrais e ausência de um cadastro centralizado entre unidades dificultam a gestão e podem gerar inconsistências. A ficha médica em papel também exige cuidado no tratamento dos dados de saúde. | Há um único cadastro de ALUNO para toda a rede, ligado à unidade de matrícula por ID_UNIDADE, em vez de um cadastro por unidade. O CPF é UNIQUE e obrigatório (RN01), o que impede o mesmo aluno duplicado, e CPF, CEP e telefone têm CHECK de formato. O endereço é dividido em colunas atômicas. A ficha médica passa a ser PRONTUARIO_SAUDE (1:1 com o aluno), com doenças e medicamentos em tabelas próprias, o que permite restringir o acesso por perfil (RNF01 e RNF02, LGPD). A consulta G09 apoia a conferência do cadastro e a A01 aponta alunos sem prontuário. O banco reduz as divergências, mas não as elimina: a correção do dado continua dependendo de quem digita. |
-| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. | Como plano, pagamentos e treino estão ligados ao mesmo aluno por chaves estrangeiras, uma única consulta com JOIN (G14, RF21) devolve os dados do aluno, o plano
+| P4 | Consulta fragmentada no software atual: o grupo observou que, para ver pendências de pagamento ou o treino do aluno, é preciso voltar ao menu inicial e abrir um item por vez, sem reunir plano de pagamento e treino. | Como plano, pagamentos e treino estão ligados ao mesmo aluno por chaves estrangeiras, as consultas com JOIN S01–S03 (e o requisito RF21) devolvem, na mesma visão ou em sequência direta, os dados do aluno, o plano, a situação dos pagamentos e o treino vigente com seus itens — sem precisar reabrir o menu a cada item. |
 
 **Escopo do sistema.** O banco reúne os dados selecionados da unidade: alunos, planos/contratos, pagamentos, acessos, saúde, avaliações físicas, treinos, exercícios, equipamentos, unidades e profissionais. A entrevista cita sistema próprio, sistema parceiro Eva e dependência de internet; a integração técnica entre esses sistemas e a catraca não foi especificada. Os problemas acima não restringem o modelo a um setor.
 
@@ -65,7 +65,7 @@
 - Perfil da unidade no Google Maps: [RedFit Academia — Neo Química Arena](https://www.google.com/maps/place/REDFIT+Academia+-+Neo+Qu%C3%ADmica+Arena+-+SP/@-23.545562,-46.4776382,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce677885731389:0xea7cfb187022485e!8m2!3d-23.5455669!4d-46.4750633!16s%2Fg%2F11hkwwgmhl).
 - Responsável: Guilherme Nogueira, gerente da unidade. Contato: WhatsApp da unidade (11) 93622-0732 e sac@redfit.com.br, conforme a página da unidade (o telefone direto do gerente não pode ser informado).
 - Página de planos da unidade (endereço, horário, contato, planos e preços): [`evidencias/fonte_planos.png`](evidencias/fonte_planos.png).
-- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/entrevista.jpg`](evidencias/entrevista.jpg).
+- Foto da entrevista no local, com o gerente da unidade, tirada em 31/08/2026, na entrevista, com o integrante Marco Aurélio: [`evidencias/entrevista.png`](evidencias/entrevista.png).
 - Imagens de divulgação da unidade (não foram tiradas pelo grupo; servem para ilustrar o local, e a comprovação de acesso é a foto da entrevista). O cartaz "RedPass" que aparece na fachada era uma promoção da inauguração e não existe mais.
 
 <img width="1200" height="1600" alt="WhatsApp Image 2026-09-12 at 15 04 19" src="https://github.com/user-attachments/assets/8a51e159-e3a8-412c-b09b-612d60e0814b" />
@@ -218,7 +218,7 @@ Fluxogramas dos processos e da integração entre eles:
 
 O DER segue a notação do brModelo: entidades em retângulos, relacionamentos em losangos, cardinalidade (mín,máx) dos dois lados, identificadores e atributos de relacionamento ligados ao losango, sem chaves estrangeiras. O diagrama final deve ser produzido/validado no brModelo, conforme a notação exigida pelo esqueleto.
 
-![DER conceitual revisado](diagramas/diagrama_entidade_relacionamento.png)
+![DER conceitual revisado](diagramas/diagrama_entidade_relacionamento.JPG)
 
 **Decisão de modelagem: entidades separadas.** O grupo manteve GERENTE, INSTRUTOR e RECEPCIONISTA como entidades independentes, sem generalização FUNCIONARIO: cada cargo tem atributos e responsabilidades próprias (CREF e especialidade do instrutor; cadastro de alunos pela recepção; administração da unidade pelo gerente). Alternativa considerada: generalização, útil se os atributos comuns crescerem; para o escopo atual duplica poucas colunas e simplifica as consultas.
 
@@ -243,7 +243,7 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 | grupo_muscular e equipamento em APARELHO | DS_GRUPO_MUSCULAR em EXERCICIO; EQUIPAMENTO é catálogo | O exercício trabalha o músculo |
 | README e DER divergentes (PAGAMENTO, UNIDADE, CHECK_IN, ITEM_TREINO ausentes) | 14 entidades no conceitual, iguais no README, no dicionário e no DER | Consistência |
 | "Aula/Treino" e "Aparelho" | TREINO e EQUIPAMENTO | A RedFit não tem aulas |
-| MATRÍCULA/CONTRATO | Mantida sem entidade própria: ID_PLANO e DT_CONTRATACAO em ALUNO. | Por orientação do professor, não é necessário criar a entidade. Limitação conhecida: o modelo guarda só o plano vigente, sem histórico de trocas ou cancelamentos. |
+| MATRÍCULA/CONTRATO | Mantida sem entidade própria: ID_PLANO e DT_CONTRATACAO em ALUNO. | Por orientação do professor, não é necessário criar a entidade. O modelo registra o plano vigente e a data de contratação; histórico de trocas e cancelamentos fica fora do escopo desta entrega (limitação consciente, não omissão). |
 | Justificativa técnica sem alternativas | Seção 1.5 com alternativas e regras citadas | Defender as decisões |
 | Uso de IA sem os 8 itens | Seção 5 com os itens por uso | Documentação obrigatória |
 | HTML com notas de IA não revisadas | Notas removidas; dicionário em HTML único | Entrega profissional |
@@ -363,7 +363,7 @@ Decisões congeladas em 06/11/2026:
 | Tema | Decisão |
 |---|---|
 | Generalização FUNCIONARIO | **Não** — tabelas GERENTE, RECEPCIONISTA e INSTRUTOR separadas |
-| CONTRATO / MATRÍCULA | **Não** — `ALUNO.ID_PLANO` + `ALUNO.DT_CONTRATACAO` |
+| CONTRATO / MATRÍCULA | **Não** — `ALUNO.ID_PLANO` + `ALUNO.DT_CONTRATACAO` (plano vigente; histórico de trocas fora do escopo) |
 | Histórico de alteração de treino | Colunas `TREINO.ID_INSTRUTOR_ALTEROU` e `TREINO.DT_ALTERACAO` (sem tabela TREINO_ALTERACAO) |
 | Boleto | **Não** — `PAGAMENTO.TP_FORMA` ∈ {PIX, DEBITO, CREDITO} |
 | Rede | **23** unidades |
@@ -434,7 +434,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHEC
 | P1 — horários de pico e acessos negados | CHECK_IN, UNIDADE | G01, G02, G03, G04 |
 | P2 — mensalidades e inadimplência | PAGAMENTO, ALUNO, PLANO | G05, G06, G07, G08 |
 | P3 — cadastro único e consistência cadastral entre unidades (dados de saúde apenas se incluídos no escopo) | ALUNO, UNIDADE, PRONTUARIO_SAUDE | G09 (confirmar se a consulta implementada cobre a visão centralizada) |
-| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | RF21; consulta gerencial ainda precisa ser identificada/implementada: o script descrito contém G01–G13 e não há G14 documentada |
+| P4 — consulta fragmentada (plano, pagamentos e treino numa só visão) | ALUNO, PLANO, PAGAMENTO, TREINO, ITEM_TREINO | RF21; atendido pelos JOINs de demonstração S01 (aluno+plano+unidade), S02 (treino vigente+itens) e S03 (pagamentos do aluno) |
 | K1 — acessos por hora | CHECK_IN, UNIDADE | G01, G02 |
 | K2 — média diária de acessos | CHECK_IN, UNIDADE | G04 |
 | K3 — alunos em atraso | PAGAMENTO, ALUNO, PLANO | G05 |
@@ -490,8 +490,8 @@ Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da
 | Prompts utilizados | "Com base nas informações levantadas sobre uma rede de academias, identifique as principais entidades necessárias para um banco de dados." · "Crie um dicionário de dados preliminar contendo entidade, atributo, descrição e regra de negócio." · "Analise as entidades e relacionamentos de um modelo conceitual de banco de dados para uma academia." · "Identifique possíveis inconsistências ou informações que precisam ser validadas antes da criação do DER." |
 | Resposta recebida | Detalhamento das principais entidades, versão base do dicionário de dados, entidades e relacionamentos, sugestões de inconsistências. |
 | Fontes consultadas e verificadas | Esqueleto fornecido pelo professor e imagem do DER. |
-| Trechos rejeitados ou corrigidos | Complementar o dicionário de dados, acrescentar algumas entidades, e re-preparar o README. |
-| Justificativa da escolha final | Realizar de uma nova forma o início do nosso projeto. |
+| Trechos rejeitados ou corrigidos | O esboço da IA foi complementado manualmente: entidades, atributos e regras foram conferidos com a entrevista; partes genéricas demais ou fora do escopo da unidade foram descartadas. |
+| Justificativa da escolha final | Usar a IA só para estruturar o material bruto do levantamento; a validação e o recorte final ficaram com o grupo. |
 | Reflexão crítica | O README gerado nesta fase e o DER desenhado pelo grupo divergiam (o README tinha entidades como Unidade, Check-in e Pagamento que não estavam no DER). Isso mostra o risco de aceitar a resposta da IA sem conferir com o produto do grupo. |
 
 ## 5.2 Uso 2 — ChatGPT: revisão do arquivo HTML do dicionário
@@ -529,9 +529,9 @@ Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da
 | Prompts utilizados | "chat esse são os requisitos da entrega 2, com base no nosso trabalho que vou mandar, como esta" · "ok, com base nos requisitos da entrega 2, como estamos, o que precisa ser feito ainda?" |
 | Resposta recebida | Lista de itens faltantes por peso, riscos (Caso A ou B) e sugestões de entidades |
 | Fontes consultadas e verificadas | Esqueleto do professor e arquivos do grupo. |
-| Trechos rejeitados ou corrigidos | A IA sugeriu a entidade CONTRATO e a generalização FUNCIONARIO; o grupo recusou ambas. A decisão de não modelar CONTRATO/MATRÍCULA deve ser reavaliada, pois a entrevista revisada explicita que a troca cancela o contrato antigo e cria um novo. Alteração registrada: GERENTE como entidade própria |
-| Justificativa da escolha final | Manter o modelo fiel à rotina da unidade |
-| Reflexão crítica | A IA não conhece a unidade; sugestões foram tratadas como hipóteses a validar |
+| Trechos rejeitados ou corrigidos | A IA sugeriu a entidade CONTRATO e a generalização FUNCIONARIO; o grupo recusou ambas. GERENTE passou a ser entidade própria. A troca de plano (cancela o vínculo anterior e cria outro) é tratada atualizando ID_PLANO e DT_CONTRATACAO em ALUNO; o histórico completo de contratos fica fora do escopo desta entrega. |
+| Justificativa da escolha final | Manter o modelo fiel à rotina da unidade e à orientação do professor de não exigir entidade CONTRATO; priorizar o plano vigente e as consultas gerenciais/auditoria. |
+| Reflexão crítica | A IA não conhece a unidade; sugestões foram tratadas como hipóteses a validar com o levantamento. A limitação de não guardar histórico de trocas de plano é consciente e documentada. |
 
 ## 5.5 Modelo lógico, normalização, script SQL, massa de dados e dicionário
 
@@ -541,5 +541,7 @@ Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da
 | Motivação | Acelerar a produção dos artefatos técnicos; o grupo adapta e valida |
 | Prompts utilizados | "Converta o modelo lógico para um script na linguagem MySQL, informe o que não consegue fazer o que ficou faltando preencher." |
 | Resposta recebida | Modelo lógico com 17 tabelas, script SQL, massa de dados fictícia, dicionário e rascunho do relatório |
-| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente(SQLite), o grupo testou em MySQL e funcionou apenas na versão 8.0.16 ou superior|
-| Reflexão crítica | Pontos a validar: o modelo proposto para contratos/matrículas e troca de planos; o vínculo do aluno com a unidade e os perfis de acesso; a massa tem inconsistências propositais para auditoria; as proporções de formas de pagamento são fictícias e devem refletir apenas opções confirmadas |
+| Fontes consultadas e verificadas | A IA usou os números do README e da entrevista. O script foi verificado pela IA em um banco equivalente (SQLite); o grupo testou em MySQL e confirmou execução correta apenas na versão 8.0.16 ou superior. Números de planos, equipe e porte foram conferidos com o levantamento e a página de planos. |
+| Trechos rejeitados ou corrigidos | A IA sugeriu entidade CONTRATO/MATRÍCULA e generalização FUNCIONARIO — ambas recusadas (plano vigente em ALUNO; GERENTE, RECEPCIONISTA e INSTRUTOR como tabelas separadas). Ajustes manuais: CHECKs de CPF/telefone/forma de pagamento, inconsistências propositais na massa (A01–A06), remoção de boleto e alinhamento dos preços ao RN19. |
+| Justificativa da escolha final | Manter o modelo fiel à rotina da unidade e à orientação do professor (sem CONTRATO obrigatório); usar a IA para acelerar DDL, massa e consultas, validando cada artefato no MySQL e no levantamento. |
+| Reflexão crítica | A IA não conhece a unidade real: proporções de formas de pagamento e volumes da massa são sintéticos. A ausência de CONTRATO limita o histórico de trocas de plano — decisão consciente de escopo, não omissão. Inconsistências na massa foram inseridas de propósito para as consultas de auditoria. |
