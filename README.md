@@ -24,7 +24,7 @@
 | Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
 | Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](fonte_planos.png) |
 | Evidências (fotos JPG/PNG) | [evidencias/entrevista.png](evidencias/entrevista.png) |
-| Slides da apresentação | [docs/script.sql](docs/script.sql) |
+| Slides da apresentação | [apresentacao/](apresentacao/) (a incluir pelo grupo) |
 
 ---
 
@@ -354,6 +354,25 @@ O DER segue a notação do brModelo: entidades em retângulos, relacionamentos e
 
 **Justificativa.** A 1FN permite consultar doenças e medicamentos individualmente (P3) e filtrar endereços; a 2FN e a 3FN evitam que mudar o nome de um plano, de uma unidade ou de um instrutor exija atualizar muitas linhas.
 
+## 1.4.1 Unificação do modelo (fonte da verdade)
+
+**Fonte da verdade:** `docs/script.sql` (DDL + restrições + nomes de colunas).
+
+Decisões congeladas em 06/11/2026:
+
+| Tema | Decisão |
+|---|---|
+| Generalização FUNCIONARIO | **Não** — tabelas GERENTE, RECEPCIONISTA e INSTRUTOR separadas |
+| CONTRATO / MATRÍCULA | **Não** — `ALUNO.ID_PLANO` + `ALUNO.DT_CONTRATACAO` |
+| Histórico de alteração de treino | Colunas `TREINO.ID_INSTRUTOR_ALTEROU` e `TREINO.DT_ALTERACAO` (sem tabela TREINO_ALTERACAO) |
+| Boleto | **Não** — `PAGAMENTO.TP_FORMA` ∈ {PIX, DEBITO, CREDITO} |
+| Rede | **23** unidades |
+| Equipe (unidade estudada) | 2 gerentes, 2 recepcionistas, **4** instrutores |
+| Alunos (estimativa) | ~**2.500** ativos; ~**500**/dia |
+| Preços | RED R$ 9,90 (1º mês) / R$ 139,90; ANUAL R$ 89,90 + matr. R$ 49,90; FIT R$ 119,90 + matr. R$ 49,90 |
+
+O dicionário HTML e o diagrama do modelo lógico devem ser relidos contra o script quando houver divergência de nome de coluna (ex.: `DT_HR_ACESSO`, `ST_ACESSO`, `TP_FORMA`).
+
 ## 1.5 Justificativas Técnicas das Decisões
 
 **Chaves primárias.** Foram usados identificadores numéricos próprios (INT AUTO_INCREMENT; BIGINT em CHECK_IN, que cresce mais) em vez de CPF: o CPF é dado pessoal, pode ser corrigido e não existe em todas as tabelas. O CPF fica como UNIQUE (RN01). Nas tabelas associativas e de listas (UNIDADE_EQUIPAMENTO, PRONTUARIO_DOENCA, PRONTUARIO_MEDICAMENTO) a PK é composta pelas FKs, pois a combinação já identifica a linha.
@@ -437,7 +456,7 @@ As regras que envolvem mais de uma tabela (RN16, RN18 e RN22) não cabem em CHEC
 
 [docs/script.sql](docs/script.sql), para **MySQL 8.0.16 ou superior**. Executa do zero (`mysql -u root -p < docs/script.sql`) e contém, nesta ordem: CREATE DATABASE; 17 CREATE TABLE; constraints (UNIQUE, CHECK e FOREIGN KEY); índices; INSERT da massa de dados; 5 SELECT com JOIN (S01–S05); 4 UPDATE e 2 DELETE; 13 consultas gerenciais (G01–G13); 6 consultas de auditoria (A01–A06). Cada consulta tem cabeçalho com código, pergunta e o problema ou a regra que atende. As consultas gerenciais e de auditoria são as usadas na demonstração.
 
-Teste do script do zero (banco vazio): PREENCHER data e ambiente do teste (ex.: MySQL Workbench do laboratório).
+Teste do script do zero (banco vazio): executar `mysql -u root -p < docs/script.sql` em MySQL 8.0.16+ (InnoDB, utf8mb4).
 
 # 4. Massa de Dados
 
@@ -446,15 +465,15 @@ A massa está no próprio script. É fictícia (nomes, CPFs, telefones e e-mails
 | Tabela | Registros | Como o volume real justifica |
 |---|---|---|
 | UNIDADE | 3 | A unidade estudada e duas fictícias, para mostrar a rede |
-| GERENTE, RECEPCIONISTA, INSTRUTOR | 3, 4, 8 | A unidade 1 tem a equipe real informada pelo gerente: 2 gerentes, 2 recepcionistas e 4 instrutores; as outras unidades têm equipes menores. |
-| PLANO | 3 | Os três planos reais |
-| ALUNO | 150 | 120 na unidade 1 como amostra para demonstração, 20 e 10 nas unidades fictícias; a massa é sintética e reduzida, não proporcional ao total estimado de alunos ativos |
-| CHECK_IN | 669 | Massa sintética de acessos distribuídos em 14 dias; não representa necessariamente o volume real da unidade |
-| PAGAMENTO | 429 | 3 meses de mensalidade por aluno (agosto a outubro de 2026) |
-| AVALIACAO_FISICA | 157 | 0, 1 ou 2 avaliações por aluno ao longo de 2026 |
-| TREINO e ITEM_TREINO | 179 e 1065 | Um treino vigente por aluno, parte com treino anterior encerrado, de 5 a 7 exercícios cada |
-| PRONTUARIO_SAUDE, DOENCA, MEDICAMENTO | 148, 13, 13 | Um prontuário por aluno, com poucos casos de doença e medicamento |
-| EQUIPAMENTO, EXERCICIO, UNIDADE_EQUIPAMENTO | 6, 18, 18 | Os 6 tipos de equipamento informados e um catálogo de exercícios |
+| GERENTE, RECEPCIONISTA, INSTRUTOR | 3, 4, 8 | Unidade 1: 2 gerentes, 2 recepcionistas e 4 instrutores; demais unidades com equipe menor. Unidade 3 **sem gerente** (inconsistência A06). |
+| PLANO | 3 | RED / ANUAL / FIT com preços congelados (RN19) |
+| ALUNO | 150 | 120 na unidade 1, 20 na 2 e 10 na 3; amostra sintética |
+| CHECK_IN | 675 | Acessos sintéticos em 14 dias (~48/dia) |
+| PAGAMENTO | 450 | 3 meses (ago–out/2026) por aluno |
+| AVALIACAO_FISICA | 155 | 0–2 avaliações por aluno |
+| TREINO e ITEM_TREINO | 188 e 1060 | Treino vigente por aluno; parte com treino anterior; 1 treino sem itens (A02); 1 aluno com 2 vigentes (A03) |
+| PRONTUARIO_SAUDE, DOENCA, MEDICAMENTO | 148, 5, 5 | 2 alunos sem prontuário (A01) |
+| EQUIPAMENTO, EXERCICIO, UNIDADE_EQUIPAMENTO | 6, 18, 18 | Equipamentos da entrevista e catálogo de exercícios |
 
 **Variedade de situações** (massa sintética para testar consultas): alunos nos planos FIT, RED e Anual; 5 menores de idade; 15 alunos com mensalidade em atraso; pagamentos na recepção por Pix e débito e mensalidades recorrentes no crédito (sem boleto); acessos liberados e negados por inadimplência; alunos sem acesso na janela; treinos encerrados e vigentes; horários de pico fictícios. Não tratar dados sintéticos de aplicativos parceiros como fatos reais da unidade. **Inconsistências propositais** para a auditoria: 2 alunos sem prontuário (A01), 1 treino sem itens (A02), 1 aluno com dois treinos vigentes (A03), 3 acessos liberados a alunos do plano RED com mensalidade em atraso (A04, regra RN16), pagamentos recorrentes feitos em forma diferente de crédito (A05, regra RN18; a redefinir no script) e 1 unidade sem gerente (A06).
 
