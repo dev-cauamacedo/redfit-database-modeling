@@ -24,7 +24,7 @@
 | Script SQL completo (MySQL) com massa de dados | [docs/script.sql](docs/script.sql) |
 | Página de planos da unidade (fonte dos planos e preços) | [evidencias/fonte_planos.png](evidencias/fonte_planos.png) |
 | Evidências (fotos) | [evidencias/entrevista.png](evidencias/entrevista.png) · [evidencias/academia.png](evidencias/academia.png) |
-| Slides da apresentação | [apresentacao/redfit_apresentacao.pptx](apresentacao/redfit_apresentacao.pptx) |
+
 
 ---
 
