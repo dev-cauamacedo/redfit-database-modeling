@@ -545,3 +545,8 @@ Ferramenta usada na entrega: **Claude**(Anthropic) e **Chat GPT**. Nas etapas da
 | Trechos rejeitados ou corrigidos | A IA sugeriu entidade CONTRATO/MATRÍCULA e generalização FUNCIONARIO — ambas recusadas (plano vigente em ALUNO; GERENTE, RECEPCIONISTA e INSTRUTOR como tabelas separadas). Ajustes manuais: CHECKs de CPF/telefone/forma de pagamento, inconsistências propositais na massa (A01–A06), remoção de boleto e alinhamento dos preços ao RN19. |
 | Justificativa da escolha final | Manter o modelo fiel à rotina da unidade e à orientação do professor (sem CONTRATO obrigatório); usar a IA para acelerar DDL, massa e consultas, validando cada artefato no MySQL e no levantamento. |
 | Reflexão crítica | A IA não conhece a unidade real: proporções de formas de pagamento e volumes da massa são sintéticos. A ausência de CONTRATO limita o histórico de trocas de plano — decisão consciente de escopo, não omissão. Inconsistências na massa foram inseridas de propósito para as consultas de auditoria. |
+---
+
+## Apresentação do Projeto
+
+[Assistir à apresentação no YouTube](https://youtu.be/_xwZpnVcDxY)
